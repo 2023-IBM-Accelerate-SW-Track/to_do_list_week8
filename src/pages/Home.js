@@ -6,10 +6,7 @@ import { Card, CardMedia, CardContent } from "@material-ui/core";
 
 class Home extends Component {
   state = {
-    todos: [
-      { id: 1, content: "buy some milk" },
-      { id: 2, content: "play video games" },
-    ],
+    todos: [],
   };
   deleteTodo = (id) => {
     const todos = this.state.todos.filter((todo) => {
