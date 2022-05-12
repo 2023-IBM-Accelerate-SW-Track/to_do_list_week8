@@ -1,8 +1,6 @@
 import React from "react";
 import "../component/todos.css";
-import { Button } from "@material-ui/core";
-import { List, Card, CardContent, CardActions } from "@material-ui/core";
-import { DeleteIcon } from "@material-ui/icons/Delete";
+import { List, Card, CardContent } from "@material-ui/core";
 
 const Todos = ({ todos, deleteTodo }) => {
   const todoList = todos.length ? (
@@ -12,17 +10,6 @@ const Todos = ({ todos, deleteTodo }) => {
           <Card>
             <CardContent>
               <span style={{ padding: "50px" }}>{todo.content}</span>
-              <CardActions>
-                <Button
-                  startIcon={DeleteIcon}
-                  variant="outlined"
-                  onClick={() => {
-                    deleteTodo(todo.id);
-                  }}
-                >
-                  Mark Complete
-                </Button>
-              </CardActions>
             </CardContent>
           </Card>
         </List>
