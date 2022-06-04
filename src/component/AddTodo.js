@@ -1,6 +1,5 @@
 import React, { Component } from "react";
-import { TextField } from "@material-ui/core";
-import { Button } from "@material-ui/core";
+import { Button, TextField } from "@mui/material";
 
 class AddTodo extends Component {
   // Create a local react state of the this component with a content property set to nothing.
