@@ -67,12 +67,12 @@ Hints (Useful Resources):
       + Navigate to `src/component/todos.js`
         1. Add `deleteTodo` as a new property to the Todos component to correspond to the new deleteTodo() function
         2. Within the Checkbox component, add an onClick event handler to call the deleteTodo() function and pass the item's `id` as a parameter
-4. We will be adding validation of duplicates and avoid users from submitting a blank task
+4. In this final step, We will be adding two validation features to avoid having duplicate tasks and users from submitting a blank task w/in the Todo list.
       + Navigate to `src/pages/Home.js`
         1. In the addTodo() function, implement a code to determine if a task already exists before performing the action to add an item to the Todo list. There are plenty of ways to implement this feature.\
         A psudeo code example can be seen below:
         ```
-        if (item exists in todo list) {
+        if (item exists in todo list or item is blank) {
             do nothing and just return
             to break out the function
         } else {
