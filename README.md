@@ -10,6 +10,7 @@ Feature requirements (Week 2 task is complete when you):
 + Allow users to mark items as complete
 + Remove completed items from list
 + Validate there are no duplicated items
++ Validate there are no blank items
 
 Implementation requirements:
 + Use [**Material UI components**](https://material-ui.com/) at least once throughout the app
@@ -24,7 +25,7 @@ Hints (Useful Resources):
 ### TO-DO List APP
 1. We will be adding the date functionality
       + Navigate to `src/components/AddTodo.js`
-        1. Initialize a new property set to nothing to represent the current date 
+        1. In the Constructor method, initialize a new property set to nothing to represent the current date 
         2. In the handleChange function, place the new date property and update the value using `Date().toLocaleString('en-US')` method
         3. In the handleSubmit function, make sure to set the new date property back to null after passing the user values to the addTodo function
       + Navigate to `src/component/todos.js`
@@ -41,22 +42,44 @@ Hints (Useful Resources):
                     <ListItemText primary={todo.content}/>
                   </ListItemButton>
                 ```
-        3. Within the ListItemText component, display the date for each task as a secondary item
+        3. Within the ListItemText component, add the secondary property next to the primary property to display the date for each task
         4. (optional) Add `style={{marginTop:10}}` to the Card component to give space between each item in the Todo list and avoid item cards from overlapping each other
 
 2. We will be adding checkbox functionality
       + Navigate to `src/component/todos.js`
         1. Within the ListItemButton component, Add a Checkbox component before the ListItemText component with a style of `paddingLeft:0` and set color to `primary`
-4. We will be adding delete functionality
+3. We will be adding delete functionality
       + Navigate to `src/pages/Home.js`
-        1. Within the Todos component in the render() function, pass in an additional property\
+        1. Implement the code snippet below for the deleteTodo() function before or after the addTodo() function\
+        **Note:** Click [**here**](https://upmostly.com/tutorials/react-filter-filtering-arrays-in-react-with-examples) to learn more about the **filter** function and how it is being used w/in the deleteTodo function to remove an item from our Todo list
+        ```
+        deleteTodo = (id) => {
+            const todos = this.state.todos.filter((todo) => {
+              return todo.id !== id;
+            });
+            this.setState({
+              todos: todos,
+            });
+        };
+        ```
+        3. Within the Todos component in the render() function, pass in an additional property\
            `deleteTodo={make your change}` to correspond to the deleteTodo function. **Hint:** replace make your change with deleteTodo() function
       + Navigate to `src/component/todos.js`
         1. Add `deleteTodo` as a new property to the Todos component to correspond to the new deleteTodo() function
-        2. Within the Checkbox component, add an onClick event handler to call the deleteTodo() function and pass the item `id` as a parameter
-4. Create deleteTodo function in src/pages/Home.js
-5. Add delete prop to Todos component in src/pages/Home.js
-6. src/component/todos.js
+        2. Within the Checkbox component, add an onClick event handler to call the deleteTodo() function and pass the item's `id` as a parameter
+4. We will be adding validation of duplicates and avoid users from submitting a blank task
+      + Navigate to `src/pages/Home.js`
+        1. In the addTodo() function, implement a code to determine if a task already exists before performing the action to add an item to the Todo list. There are plenty of ways to implement this feature.\
+        A psudeo code example can be seen below:
+        ```
+        if (item exists in todo list) {
+            do nothing and just return
+            to break out the function
+        } else {
+            perform the action to add
+            the item to the Todo list }
+        ```
+      + **Note:** Look into utilizing the [**find**](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/find) function to check if an item exists and the [**trim**](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/trim) function to avoid user's from submitting a blank task. 
 
 ## Testing
 When testing web components, developers often use ids to uniquely define elements on a page. The React Testing Library provides a query which can identify items with the attribute data-testid to do just that (reference [here](https://testing-library.com/docs/queries/bytestid/)). We have implemented simple tests in `App.test.js` that will look for ids in your code. Do not push changes to the tests in this file. To get familiar with the idea of testing ids, implement the attributes below:
