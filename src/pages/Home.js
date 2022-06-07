@@ -31,12 +31,12 @@ class Home extends Component {
     return (
       <div className="Home">
         <h1>Todo's </h1>
-        {/* When returning the Todos component, todos is a prop passed to the todos.js file
-         to format and render the current todo list state */}
-        <Todos todos={this.state.todos} />
         {/* When passing the AddTodo component, addTodo is a prop that is used in the 
         AddTodo.js file when handling the submit */}
         <AddTodo addTodo={this.addTodo} />
+        {/* When returning the Todos component, todos is a prop passed to the todos.js file
+         to format and render the current todo list state */}
+        <Todos todos={this.state.todos} />
       </div>
     );
   }
