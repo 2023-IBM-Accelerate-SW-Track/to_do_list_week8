@@ -1,20 +1,41 @@
-# Project: Week 2: To-do list application
+# Project Week 2: To-do list application (Cont.)
 ## Introduction
-As a team, you should create and style the front-end of a to-do list web application using React and Material UI components. A typical user wants to be able to use a to-do list to organize tasks. Keeping user stories in mind when designing applications helps determine important features. We encourage you to take a unique approach to this lab as there is no one right answer. 
+As of now, you have completed Project Week 1 and should now have a React Application that can navigate to an **About me** page and a **Home** page currently hosting the Todo List Application that we will continue to build upon for Project Week 2. For Project Week 2, Look to implement more Material UI components to the front-end of your to-do list web application to give it a sleek and modern appearance. Aside from styling, A typical user wants to be able to use a to-do list to organize tasks. Keeping user stories in mind when designing applications helps determine important features. We encourage you to take a unique approach to this lab as there is no one right answer. 
 - [Material Design](https://material.io/design/introduction) is a design system that can guide you on what UI decisions to make if you would like to explore best practices, but functionality is the key focus of the lab.
 - No back-end is required for this lab, all data (tasks) should live in the front-end.
 
-
 ## Requirements
-Feature requirements (Week1 task is complete when you):
-+ Design your personalize about me page
-+ **Take in and display** to do list items
+Feature requirements (Week 2 task is complete when you):
++ Provide the date and time of item addition
++ Allow users to mark items as complete
++ Remove completed items from list
++ Validate there are no duplicated items
 
 Implementation requirements:
 + Use [**Material UI components**](https://material-ui.com/) at least once throughout the app
++ Use Javascript's list.map function at least once to manipulate list items
 + Implement at least one **functional component**
 
+Hints (Useful Resources):
++ Click [**here**](https://reactjs.org/docs/lists-and-keys.html) for an example on utilizing the list.map function
++ Click [**here**](https://reactjs.org/docs/lists-and-keys.html) for an example on utilizing the Date() object
+
 ## Instructions
+
+### TO-DO List APP
+1. We will be adding the date functionality
+      + Navigate to `src/components/AddTodo.js`
+        1. Initialize a new property set to nothing to represent the current date 
+        2. In the handleChange function, place the new date property and update the value using `Date().toLocaleString('en-US')` method
+        3. In the handleSubmit function, make sure to set the new date property back to null after passing the user values to the addTodo function
+      + Navigate to `src/component/todos.js`
+        1. N/A
+
+2. We will be adding delete functionality
+      + Navigate to `src/pages/Home.js`
+4. Create deleteTodo function in src/pages/Home.js
+5. Add delete prop to Todos component in src/pages/Home.js
+6. src/component/todos.js
 
 ## Testing
 When testing web components, developers often use ids to uniquely define elements on a page. The React Testing Library provides a query which can identify items with the attribute data-testid to do just that (reference [here](https://testing-library.com/docs/queries/bytestid/)). We have implemented simple tests in `App.test.js` that will look for ids in your code. Do not push changes to the tests in this file. To get familiar with the idea of testing ids, implement the attributes below:
