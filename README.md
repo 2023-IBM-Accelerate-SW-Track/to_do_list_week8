@@ -1,4 +1,4 @@
-# Project: Week 1: To-do list application
+# Project: Week 2: To-do list application
 ## Introduction
 As a team, you should create and style the front-end of a to-do list web application using React and Material UI components. A typical user wants to be able to use a to-do list to organize tasks. Keeping user stories in mind when designing applications helps determine important features. We encourage you to take a unique approach to this lab as there is no one right answer. 
 - [Material Design](https://material.io/design/introduction) is a design system that can guide you on what UI decisions to make if you would like to explore best practices, but functionality is the key focus of the lab.
@@ -14,6 +14,7 @@ Implementation requirements:
 + Use [**Material UI components**](https://material-ui.com/) at least once throughout the app
 + Implement at least one **functional component**
 
+## Instructions
 
 ## Testing
 When testing web components, developers often use ids to uniquely define elements on a page. The React Testing Library provides a query which can identify items with the attribute data-testid to do just that (reference [here](https://testing-library.com/docs/queries/bytestid/)). We have implemented simple tests in `App.test.js` that will look for ids in your code. Do not push changes to the tests in this file. To get familiar with the idea of testing ids, implement the attributes below:
