@@ -18,7 +18,6 @@ Implementation requirements:
 
 Hints (Useful Resources):
 + Click [**here**](https://reactjs.org/docs/lists-and-keys.html) for an example on utilizing the list.map function
-+ Click [**here**](https://reactjs.org/docs/lists-and-keys.html) for an example on utilizing the Date() object
 
 ## Instructions
 
@@ -29,10 +28,32 @@ Hints (Useful Resources):
         2. In the handleChange function, place the new date property and update the value using `Date().toLocaleString('en-US')` method
         3. In the handleSubmit function, make sure to set the new date property back to null after passing the user values to the addTodo function
       + Navigate to `src/component/todos.js`
-        1. N/A
+        1. Within the Card component, substitute the CardContent component with a ListItemButton Component
+            + **Before:**
+               ```
+                  <CardContent>
+                    <span style={{ padding: "50px" }}>{todo.content}</span>
+                  </CardContent>
+               ```
+            + **After:**
+               ```
+                  <ListItemButton component="a" href="#simple-list">
+                    <ListItemText primary={todo.content}/>
+                  </ListItemButton>
+                ```
+        3. Within the ListItemText component, display the date for each task as a secondary item
+        4. (optional) Add `style={{marginTop:10}}` to the Card component to give space between each item in the Todo list and avoid item cards from overlapping each other
 
-2. We will be adding delete functionality
+2. We will be adding checkbox functionality
+      + Navigate to `src/component/todos.js`
+        1. Within the ListItemButton component, Add a Checkbox component before the ListItemText component with a style of `paddingLeft:0` and set color to `primary`
+4. We will be adding delete functionality
       + Navigate to `src/pages/Home.js`
+        1. Within the Todos component in the render() function, pass in an additional property\
+           `deleteTodo={make your change}` to correspond to the deleteTodo function. **Hint:** replace make your change with deleteTodo() function
+      + Navigate to `src/component/todos.js`
+        1. Add `deleteTodo` as a new property to the Todos component to correspond to the new deleteTodo() function
+        2. Within the Checkbox component, add an onClick event handler to call the deleteTodo() function and pass the item `id` as a parameter
 4. Create deleteTodo function in src/pages/Home.js
 5. Add delete prop to Todos component in src/pages/Home.js
 6. src/component/todos.js
