@@ -23,7 +23,7 @@ Hints (Useful Resources):
 ## Instructions
 
 ### TO-DO List APP
-1. We will be adding the date functionality
+1. In this step, we will be adding the feature to display the date and time an item was added along with its task to the user. Also, we will be implementing a new component to display each item in the Todo list.
       + Navigate to `src/components/AddTodo.js`
         1. In the Constructor method, initialize a new property set to nothing to represent the current date 
         2. In the handleChange function, place the new date property and update the value using `Date().toLocaleString('en-US')` method
@@ -45,10 +45,10 @@ Hints (Useful Resources):
         3. Within the ListItemText component, add the secondary property next to the primary property to display the date for each task
         4. (optional) Add `style={{marginTop:10}}` to the Card component to give space between each item in the Todo list and avoid item cards from overlapping each other
 
-2. We will be adding checkbox functionality
+2. In this step, we will be adding the checkbox feature to correspond to a task being completed
       + Navigate to `src/component/todos.js`
         1. Within the ListItemButton component, Add a Checkbox component before the ListItemText component with a style of `paddingLeft:0` and set color to `primary`
-3. We will be adding delete functionality
+3. In this step, we will be adding the delete feature which will remove an item from the Todo list once it is complete (user clicks on checkbox button)
       + Navigate to `src/pages/Home.js`
         1. Implement the code snippet below for the deleteTodo() function before or after the addTodo() function\
         **Note:** Click [**here**](https://upmostly.com/tutorials/react-filter-filtering-arrays-in-react-with-examples) to learn more about the **filter** function and how it is being used w/in the deleteTodo function to remove an item from our Todo list
