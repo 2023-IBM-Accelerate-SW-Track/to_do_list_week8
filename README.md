@@ -10,7 +10,6 @@ Feature requirements (Week 2 task is complete when you):
 + Allow users to mark items as complete
 + Remove completed items from list
 + Validate there are no duplicated items
-+ Validate there are no blank items
 
 Implementation requirements:
 + Use [**Material UI components**](https://material-ui.com/) at least once throughout the app
@@ -29,7 +28,8 @@ Hints (Useful Resources):
         2. In the handleChange function, place the new date property and update the value using `Date().toLocaleString('en-US')` method
         3. In the handleSubmit function, make sure to set the new date property back to null after passing the user values to the addTodo function
       + Navigate to `src/component/todos.js`
-        1. Within the Card component, substitute the CardContent component with a ListItemButton Component
+        1. import ListItemButton and ListItemText components from the material UI library
+        2. Within the Card component, substitute the CardContent component with a ListItemButton Component
             + **Before:**
                ```
                   <CardContent>
@@ -47,7 +47,8 @@ Hints (Useful Resources):
 
 2. In this step, we will be adding the checkbox feature to correspond to a task being completed
       + Navigate to `src/component/todos.js`
-        1. Within the ListItemButton component, Add a Checkbox component before the ListItemText component with a style of `paddingLeft:0` and set color to `primary`
+        1. import Checkbox from the material UI library
+        2. Within the ListItemButton component, Add a Checkbox component before the ListItemText component with a style of `paddingLeft:0` and set color to `primary`
 3. In this step, we will be adding the delete feature which will remove an item from the Todo list once it is complete (user clicks on checkbox button)
       + Navigate to `src/pages/Home.js`
         1. Implement the code snippet below for the deleteTodo() function before or after the addTodo() function\
@@ -67,19 +68,19 @@ Hints (Useful Resources):
       + Navigate to `src/component/todos.js`
         1. Add `deleteTodo` as a new property to the Todos component to correspond to the new deleteTodo() function
         2. Within the Checkbox component, add an onClick event handler to call the deleteTodo() function and pass the item's `id` as a parameter
-4. In this final step, We will be adding two validation features to avoid having duplicate tasks and users from submitting a blank task w/in the Todo list.
+4. In this final step, We will be adding a validation feature to avoid having duplicate tasks w/in the Todo list.
       + Navigate to `src/pages/Home.js`
         1. In the addTodo() function, implement a code to determine if a task already exists before performing the action to add an item to the Todo list. There are plenty of ways to implement this feature.\
         A psudeo code example can be seen below:
         ```
-        if (item exists in todo list or item is blank) {
+        if (item exists in todo list) {
             do nothing and just return
             to break out the function
         } else {
             perform the action to add
             the item to the Todo list }
         ```
-      + **Note:** Look into utilizing the [**find**](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/find) function to check if an item exists and the [**trim**](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/trim) function to avoid user's from submitting a blank task. 
+      + **Note:** Look into utilizing the [**find**](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/find) function to check if current item already exists w/in the Todo list. 
 
 ## Testing
 When testing web components, developers often use ids to uniquely define elements on a page. The React Testing Library provides a query which can identify items with the attribute data-testid to do just that (reference [here](https://testing-library.com/docs/queries/bytestid/)). We have implemented simple tests in `App.test.js` that will look for ids in your code. Do not push changes to the tests in this file. To get familiar with the idea of testing ids, implement the attributes below:
