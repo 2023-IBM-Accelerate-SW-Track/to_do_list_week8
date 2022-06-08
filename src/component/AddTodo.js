@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Button, TextField } from "@mui/material";
 
 class AddTodo extends Component {
-  // Create a local react state of the this component with a content property set to nothing.
+  // Create a local react state of the this component with both content date property set to nothing.
   constructor() {
     super();
     this.state = {
@@ -10,7 +10,7 @@ class AddTodo extends Component {
       date: ""
     };
   }
-  // The handleChange function updates the react state with the new input value provided from the user.
+  // The handleChange function updates the react state with the new input value provided from the user and the current date/time.
   // "event" is the defined action a user takes. In this case, the event is triggered when the user types something
   // into the text field.
   handleChange = (event) => {
@@ -21,7 +21,7 @@ class AddTodo extends Component {
   };
   // The handleSubmit function collects the forms input and puts it into the react state.
   // event.preventDefault() is called to prevents default event behavior like refreshing the browser.
-  // this.props.addTodo(this.state) passes the current state (or user input) into the addTodo function defined
+  // this.props.addTodo(this.state) passes the current state (or user input and current date/time) into the addTodo function defined
   // in the Home.js file which then adds the input into the list.
   handleSubmit = (event) => {
     event.preventDefault();
