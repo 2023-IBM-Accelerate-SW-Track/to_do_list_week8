@@ -12,7 +12,11 @@ class Home extends Component {
     };
   }
 
+  // the deleteTodo function simply creates a new array that removes the todo item selected from the user from the list
+  // and then updates the state with the new list.
   deleteTodo = (id) => {
+    // Within this function, the item's id is being utilized in order to filter it out from the todo list
+    // and then updates the state with a new list
     const todos = this.state.todos.filter((todo) => {
       return todo.id !== id;
     });
