@@ -36,7 +36,7 @@ import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 + Next inside  `state = { //code here// }` add a new variable to store the due date and set it to null (i.e. `due : null,`)
 + Replace `\*value*\` with the new state variable.
 + Finally change `\*OnChange*\` to a new onChange function and use the new state variable. 
-+ Note that the value from the the date picker will give more that just the date in mm/dd/yyyy. To format the date we need set the due date variable to `new Date(e).toLocaleDateString()`
++ Note that the value from the the date picker will give more that just the date in mm/dd/yyyy. To format the date we need set the due date variable to `new Date(event).toLocaleDateString()`
 + Note when reseting the due date variable set it to null in the `onSubmit` function
 
 Right now the button works however we are able submit a task with an empty due date. We need to change this so that only task with both a task name and due date create a task. 
