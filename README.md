@@ -21,7 +21,7 @@ Instructions:
 import { DesktopDatePicker , LocalizationProvider} from '@mui/x-date-pickers';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 ``` 
-+ Then you need to add this between the text field that you used to get the task name and the button to submit the task information.
++ Then you need to add this between the TextField that you used to input the task name and the add task button.
  ```   
 <LocalizationProvider dateAdapter={AdapterDateFns}>         
    <DesktopDatePicker
