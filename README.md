@@ -92,7 +92,7 @@ test('test that App component renders Task', () => {
 + `screen.getByRole('textbox', {name: /Add New Item/i})`  Looks for a textbox compentent with the words "Add New Item"
 + `fireEvent.change(inputTask, { target: { value: "History Test"}})` Types the value "History Test" into the text box.
 + `fireEvent.click()` clicks the selected element.
-+ `screen.getByText(/History Test/i)` searches for "History Test" on the screen ignoring case. 
++ `screen.getByText(/History Test/i)` searches for "History Test" on the screen ignoring case using regex. 
 + `expect(check).toBeInTheDocument();` the element should be in the page if it is the test case is passed. Otherwise the test fails.
 + Note: that the elements returned by `getByRole` or `getByText` may not have css or styling. If you want to have those values put a `data-testid` in that component and use `getByTestId` to grab those IDs.
 
