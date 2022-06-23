@@ -1,111 +1,104 @@
-# Project Week 3 To-do list application (Cont.)
+# Project Week 4: To-do list application (Cont.)
 ## Introduction
-As of now, you have completed Project Week 2 and should now have a React Application Todo List Application that can add and delete unique tasks. For Project Week 3 we will finish up the frontend and make our own unit tests to make sure out App is working properly  We encourage you to take a unique approach to this lab as there is no one right answer. 
-- [Material Design](https://material.io/design/introduction) is a design system that can guide you on what UI decisions to make if you would like to explore best practices, but functionality is the key focus of the lab.
-- No back-end is required for this lab, all data (tasks) should live in the front-end.
-
+As of now, you have completed Project Week 3 and should now have a fully functional React Application with the ability to navigate to an **About me** page and a **Home** page hosting the Todo List Application. The Todo List Application itself allows users to provide a task w/ a due date, create a list w/ those user inputs to be displayed on a webpage, mark those task as complete and remove them from the list, and etc. Currently, all data which is essentially our tasks in this case lives in the front-end (Todo List Application). Everytime we refresh the page or restart our application that data is lost. This is where the backend component comes into play. The backend component will allow us to communicate to our front-end component (Todo List Application) using express and save our data inside a database (json file) where data will not be lost after a page refresh or application restart. For Project Week 4, you will go thru the process of initializing and creating a backend component, using express to communicate with the front-end component, and using axios to communicate with backend component.
 
 ## Requirements
-Feature requirements (Week 3 task is complete when you):
-+ Provide the due date for the task
-+ Change the color of overdue tasks
-+ Make test cases to test your application
+Feature requirements (Week 4 task is complete when you):
++ Create and Initialize an Express application (Backend)
++ Create a connection between the Backend and Front-end
++ Create a json file to represent your database
++ Create a **POST** request to submit data to the json file
 
 Implementation requirements:
-+ Use [**DesktopDatePicker**](https://mui.com/x/react-date-pickers/date-picker/)  to store the date that the task should be finished by.
-+ Use [**React Testing Library**](https://testing-library.com/docs/react-testing-library/cheatsheet) to create unit tests to test your code.
++ Use [**Express**](https://www.npmjs.com/package/express) w/in the backend component
++ Use [**Axios**](https://www.npmjs.com/package/axios) w/in the front-end component (Todo List Application)
 
-Instructions:
-1. To start this project we need to add a component that allows us to select a duedate for our tasks.
-    + To add the Date Picker add these imports to `src/component/AddTodo.js` 
-    ```
-    import { DesktopDatePicker , LocalizationProvider} from '@mui/x-date-pickers';
-    import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
-    ``` 
-    + Next inside  `this.state = { //code here// }` in the constructor add a new variable to store the due date and set it to null (i.e. `due : null,`)
-    + Then you need to add this between the TextField and the Button in the render function.
-     ```   
-    <LocalizationProvider dateAdapter={AdapterDateFns}>         
-       <DesktopDatePicker
-            id="new-item-date"
-            label="Due Date"
-            value={/*value*/}
-            onChange={/*onChange*/}
-            renderInput={(params) => <TextField {...params} />}
-        />
-    </LocalizationProvider>
-    ```
-    + Replace `\*value*\` with the new state variable.
-    + Create a new handleChange function for the datepicker to set the value of your due date. You are free to name this function. 
-        1. (Hint: use handleChange as a template. Don't forget to remove the content and date values. You won't need that here.) 
-        2. Note that the value from the the date picker will give more that just the date in mm/dd/yyyy. To format the date we need set the due date variable to `new Date(event).toLocaleDateString()`
-    + Change `\*OnChange*\` to the new handle function that you created.
-    + Finally reset the value of the duedate to null in the `onSubmit` function
+## Instructions
 
-2. Right now the button works however we are able submit a task with an empty due date. We need to change this so that only task with both a task name and due date create a task. 
+### TO-DO List APP
+1. In this step, we will be adding the feature to display the date and time an item was added along with its task to the user. Also, we will be implementing a new component to display each item in the Todo list.
+      + Navigate to `src/component/AddTodo.js`
+        1. In the Constructor method, add a new key w/ the name `date` set to an empty string to represent the current date 
+        2. In the handleChange function, place the newly created `date` key and update the value using `Date().toLocaleString('en-US')` method
+        3. In the handleSubmit function, make sure to set the newly created `date` key back to an empty string after passing the user values to the addTodo function
+      + Navigate to `src/component/todos.js`
+        1. If not present, import ListItemButton and ListItemText components from the material UI library
+        2. Within the Card component, substitute the CardContent component with a ListItemButton Component
+            + **Before:**
+               ```
+                  <CardContent>
+                    <span style={{ padding: "50px" }}>{todo.content}</span>
+                  </CardContent>
+               ```
+            + **After:**
+               ```
+                  <ListItemButton component="a" href="#simple-list">
+                    <ListItemText primary={todo.content}/>
+                  </ListItemButton>
+                ```
+        3. Within the ListItemText component, add the `secondary` property next to the `primary` property to display the date for each task
+        4. (optional) Add `style={{marginTop:10}}` to the Card component to give space between each item in the Todo list and avoid item cards from overlapping each other
 
-    + We need to go to `src/pages/Home.js` and go to the `addTodo` function where we made sure no duplicate tasks were added. (Hint: The date picker will give us three values: A valid date in string form, `"Invalid Date"` or `null`.) Create a check for `"Invalid Date"` or `null` so no task is made.
-        1.  Recall the psudeo code from week 2
+2. In this step, we will be adding the checkbox feature to correspond to a task being completed
+      + Navigate to `src/component/todos.js`
+        1. If not present, import Checkbox from the material UI library
+        2. Within the ListItemButton component, Add a Checkbox component before the ListItemText component with a `style` property set to `paddingLeft:0` and a `color` property set to `primary`. **Hint:** `color` is a property of its own and not a property of `style`.
+3. In this step, we will be adding the delete feature which will remove an item from the Todo list once it is complete (user clicks on checkbox button)
+      + Navigate to `src/pages/Home.js`
+        1. Implement the code snippet below for the deleteTodo() function before or after the addTodo() function\
+        **Note:** Click [**here**](https://upmostly.com/tutorials/react-filter-filtering-arrays-in-react-with-examples) to learn more about the **filter** function and how it is being used w/in the deleteTodo function to remove an item from our Todo list
         ```
-        if (null or "Invalid Date" in todo list) {
+        deleteTodo = (id) => {
+            const todos = this.state.todos.filter((todo) => {
+              return todo.id !== id;
+            });
+            this.setState({
+              todos: todos,
+            });
+        };
+        ```
+        2. Within the Todos component in the render() function, pass in an additional property\
+           `deleteTodo={make your change}` to correspond to the deleteTodo function. **Hint:** replace `make your change` with deleteTodo() function
+      + Navigate to `src/component/todos.js`
+        1. Add `deleteTodo` as a new property to the Todos component to correspond to the new deleteTodo() function
+        2. Within the Checkbox component, add an onClick event handler to call the deleteTodo() function and pass the todo item's `id` as a parameter. **Hint:** Use an Arrow Function. Click [**here**](https://reactjs.org/docs/faq-functions.html) to learn about passing functions to components.
+4. In this final step, We will be adding a validation feature to avoid having duplicate tasks w/in the Todo list.
+      + Navigate to `src/pages/Home.js`
+        1. In the addTodo() function, implement a code to determine if a task already exists before performing the action to add an item to the Todo list. There are plenty of ways to implement this feature.\
+        A psudeo code example can be seen below:
+        ```
+        if (item exists in todo list) {
             do nothing and just return
             to break out the function
         } else {
             perform the action to add
             the item to the Todo list }
-        ```    
-
-3. At this point we have a working button that properly creates tasks with due dates however the due date value isn't currently being used.
-
-    + We want to display these due dates and highlight any overdue items. We can do this in `src/component/todos.js`
-    + Inside the map function above the return function make a variable called `color` and set it to `"#ffffffff"` or `"white"` (#ffffffff is white's hex color value)
-    + Then check if todays date to the due date of the task. If the due date is in the past change then set `color` to a different color. 
-        1. (You do not have to keep the original card white, however you MUST make overdue cards a different color. Play around and find colors that you like.) 
-        2. Note that your due date value is a string. You will have to use `new Date(/*due date variable*/)` to compare it to the current date 
-        3. (Hint: you can get the current date with `new Date()`)  
-    + Next inside the card that you used to display the tasks set the `background` to `color`. 
-        1. (Hint: This is in  `<Card style={{\*Code*\}}>` from last week. If you did not add a style in the card add it now)
-    + Add `data-testid={/*task-name*/}` inside the card as well. Where `task-name` is the variable that holds the task name. 
-        1. (Hint: Look in `ListItemText primary={}` for this value)
-    + Finally in ListItemText change the value of `secondary={/*Somevalue*/}` with your due date value.
+        ```
+      + **Note:** Look into utilizing the [**find**](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/find) function to check if current item already exists w/in the Todo list. 
+      ```
+      array = [1,2,3,4,5,6]
+      const exists = array.find(t => t === '4')
+      console.log(exists)
+      
+      Output: true
+      ```
 
 ## Testing
-This week we will be writing some test cases. Below is an example of a unit test that adds a History Test task due 05/30/2023.
-```
-test('test that App component renders Task', () => {
-  render(<App />);
-  const inputTask = screen.getByRole('textbox', {name: /Add New Item/i});
-  const inputDate = screen.getByPlaceholderText("mm/dd/yyyy");
-  const element = screen.getByRole('button', {name: /Add/i});
-  const dueDate = "05/30/2023";
-  fireEvent.change(inputTask, { target: { value: "History Test"}});
-  fireEvent.change(inputDate, { target: { value: dueDate}});
-  fireEvent.click(element);
-  const check = screen.getByText(/History Test/i);
-  const checkDate = screen.getByText(new RegExp(dueDate, "i"));
-  expect(check).toBeInTheDocument();
-  expect(checkDate).toBeInTheDocument();
- });
+Upon completion of Week 2 Lab Project, all the necessary components and functions should be implemented in order to successfully complete the test cases mentioned below:
++ Add Button Componenet adds task to list (on click)
++ Add Button Componenet doesn't add blank task to list (on click)
++ Add Button Componenet doesn't add duplicate task to list (on click)
++ Checkbox Button component removes task from list (on click)
 
-```
-+ `render(<App />);` mocks the compentent so that we can do the testing
-+ `screen.getByRole('textbox', {name: /Add New Item/i})`  Looks for a textbox compentent with the words "Add New Item"
-+ `fireEvent.change(inputTask, { target: { value: "History Test"}})` Types the value "History Test" into the text box.
-+ `fireEvent.click()` clicks the selected element.
-+ `screen.getByText(/History Test/i)` searches for "History Test" on the screen ignoring case using regex. (Note: getBy only looks for one value. If more than one value or no value is present then an error will occur.  If you want to get more then use `getAllBy`). 
-+ `expect(check).toBeInTheDocument();` the element should be in the page if it is the test case is passed. Otherwise the test fails. 
-+ If you want to check if a value is equal to something you can use `expect(value).toBe(value_I_want)`.
-+ Note: that the elements returned by `getByRole` or `getByText` may not have css or styling. If you want to have those values put a `data-testid` in that component and use `getByTestId` to grab those IDs.
-+ If we want to check if a value is 
-1. Complete the Following Test Cases in `src/AddTodo.test.js`
-    + No duplicate task
-    + Submit Task with No Due Date
-    + Submit Task with No Task Name
-    + Late Tasks have Different Colors
-        1. Hint if we wanted to grab the color of the card for "History Test" we can use `const historyCheck = screen.getByTestId(/History Test/i).style.background`
-    + Delete Task
-        1. Hint: Earlier we used `screen.getByRole` for getting a Button and a Text Box how would we get a Checkbox? 
- 
- To run these tests run `npm run test`
- ## Pre-session Material
-Here is a [**link**](https://) to the pre-session material that was provided to you earlier.
+
+Note: Material UI components (and other libraries) render as HTML components under the hood, so using Material UI's TextField would still render in the DOM as an Input element and pass the tests for this lab.
+
+## Pre-session Material
+Here is a [**link**](https://ibm.ent.box.com/file/969593458868?s=cj7tfykcxop5kfaz5b18dszfcfz0ac1e) to the pre-session material that was provided to you earlier.
+
+
+# Project Week 3 To-do list application (Cont.)
+## Introduction
+As of now, you have completed Project Week 2 and should now have a React Application Todo List Application that can add and delete unique tasks. For Project Week 3 we will finish up the frontend and make our own unit tests to make sure out App is working properly  We encourage you to take a unique approach to this lab as there is no one right answer. 
+- [Material Design](https://material.io/design/introduction) is a design system that can guide you on what UI decisions to make if you would like to explore best practices, but functionality is the key focus of the lab.
+- No back-end is required for this lab, all data (tasks) should live in the front-end.
