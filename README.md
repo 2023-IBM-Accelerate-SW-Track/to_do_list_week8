@@ -7,7 +7,7 @@ Feature requirements (Week 4 task is complete when you):
 + Create and Initialize an Express application (Backend)
 + Create a connection between the Backend and Front-end
 + Create a json file to represent your database
-+ Create a **POST** request to submit data to the json file
++ Create a **POST** request to submit data to a json file
 
 Implementation requirements:
 + Use [**Express**](https://www.npmjs.com/package/express) w/in the backend component
