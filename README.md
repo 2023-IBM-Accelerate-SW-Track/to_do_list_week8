@@ -104,7 +104,27 @@ Implementation requirements:
            ```
            import Axios from "axios";
            ```
-        2. 
+        2. In the handleSubmit function, implement the code snippets provided below before performing the **addTodo** action:
+           ```
+           const jsonObject = {
+              id: this.state.id,
+              task: <key representing the task content>,
+              currentDate: <key representing the date/time task was added>,
+              dueDate: <key representing the date/time task is due>
+           };
+           ```
+           ```
+           Axios({
+              method: "POST",
+              url: "http://localhost:<port>/add/item",
+              data: {jsonObject},
+              headers: {
+                 "Content-Type": "application/json"
+              }
+           }).then(res => {
+              console.log(res.data.message);
+           });
+           ```
 
 ## Running Application
 Upon completion of Week 4 Lab Project, all the necessary components and functions should be implemented in order to successfully complete the test cases mentioned below:
