@@ -17,7 +17,7 @@ Implementation requirements:
 
 ### Express APP (Backend)
 1. In this step, we will be going thru the process of creating an Express application w/ in our Todo List Application. **Note:** From here on out, the term Backend will correspond to our Express Application, Front-end will correspond to our Todo List Application, and vice versa.
-      + Navigate to our project's `root` directory and run the following command w/in the terminal. **Hint:** Essentially, this is the directory where our `src` and `public` folders are located.
+      + Navigate to our project's root directory and run the following command w/in the terminal. **Hint:** Essentially, this is the directory where our `src` and `public` folders are located.
         1. Create a new folder called `backend` that will essentially host our Express application by running the following command: `mkdir backend`
       + Navigate to the newly created `backend` folder and run the following commands w/in the terminal. **Hint:** Currently, this directory should be empty with no such sub-folders or files present.
         1. Run the following command to initialize your directory with some basic information: `npm init`\
@@ -27,13 +27,14 @@ Implementation requirements:
            **Note:** Cors allows us to relax the security applied to an API and you can learn more about this module [**here**](https://www.section.io/engineering-education/how-to-use-cors-in-nodejs-with-express/)
         5. Create a new file called `index.js` out of which we'll run our Express server by running this command: `touch index.js`\
            **Note:** If this command doesn't work, look into creating the file thru a file explorer.
-        5. The file structure of your project should now look similar to what is shown on the screenshot below:
-           <img width="299" alt="Screen Shot 2022-06-23 at 6 25 55 AM" src="https://user-images.githubusercontent.com/57464095/175310108-65d0525c-c0b4-4432-8c12-a01ce7a0c05e.png">
+         
+      + The file structure of your project should now look similar to what is shown on the screenshot below:
+        <img width="299" alt="Screen Shot 2022-06-23 at 6 25 55 AM" src="https://user-images.githubusercontent.com/57464095/175310108-65d0525c-c0b4-4432-8c12-a01ce7a0c05e.png">
            
 2. In this step, we will be using Express to create a simple web server that will then be ran on a specified port.\
    **Note:** As you follow along w/ these sub-steps, place each snippet of code below the other.
       + Navigate to `backend/index.js`
-        1. Implement the snippet code provided below:
+        1. Implement the code snippet provided below:
            ```
            const express = require("express"),
                   app = express(),
@@ -42,23 +43,23 @@ Implementation requirements:
            const bodyParser = require('body-parser');
            const fs = require("fs");
            ```
-        2. Implement the snippet code provided below:
+        2. Implement the code snippet provided below:
            ```
            app.use(cors());
            app.use(bodyParser.json({ extended: true }));
            app.listen(port, () => console.log("Backend server live on " + port));
            ```
-        3. Implement the snippet code provided below:
+        3. Implement the code snippet provided below:
            ```
            app.get("/", (req, res) => {
            res.send({ message: "Connected to Backend server!" });
            });
            ```
-         4. Implement the snippet code provided below:
+         4. Implement the code snippet provided below:
             ```
             app.post("/add/item", addItem)
             ```
-         5. Implement the snippet code provided below:
+         5. Implement the code snippet provided below:
             ```
             function addItem (request, response) {
             let task = request.body.jsonObject.task
@@ -82,62 +83,35 @@ Implementation requirements:
             }
             ```
            
-3. In this step, we will be adding the delete feature which will remove an item from the Todo list once it is complete (user clicks on checkbox button)
-      + Navigate to `src/pages/Home.js`
-        1. Implement the code snippet below for the deleteTodo() function before or after the addTodo() function\
-        **Note:** Click [**here**](https://upmostly.com/tutorials/react-filter-filtering-arrays-in-react-with-examples) to learn more about the **filter** function and how it is being used w/in the deleteTodo function to remove an item from our Todo list
-        ```
-        deleteTodo = (id) => {
-            const todos = this.state.todos.filter((todo) => {
-              return todo.id !== id;
-            });
-            this.setState({
-              todos: todos,
-            });
-        };
-        ```
-        2. Within the Todos component in the render() function, pass in an additional property\
-           `deleteTodo={make your change}` to correspond to the deleteTodo function. **Hint:** replace `make your change` with deleteTodo() function
-      + Navigate to `src/component/todos.js`
-        1. Add `deleteTodo` as a new property to the Todos component to correspond to the new deleteTodo() function
-        2. Within the Checkbox component, add an onClick event handler to call the deleteTodo() function and pass the todo item's `id` as a parameter. **Hint:** Use an Arrow Function. Click [**here**](https://reactjs.org/docs/faq-functions.html) to learn about passing functions to components.
-4. In this final step, We will be adding a validation feature to avoid having duplicate tasks w/in the Todo list.
-      + Navigate to `src/pages/Home.js`
-        1. In the addTodo() function, implement a code to determine if a task already exists before performing the action to add an item to the Todo list. There are plenty of ways to implement this feature.\
-        A psudeo code example can be seen below:
-        ```
-        if (item exists in todo list) {
-            do nothing and just return
-            to break out the function
-        } else {
-            perform the action to add
-            the item to the Todo list }
-        ```
-      + **Note:** Look into utilizing the [**find**](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/find) function to check if current item already exists w/in the Todo list. 
-      ```
-      array = [1,2,3,4,5,6]
-      const exists = array.find(t => t === '4')
-      console.log(exists)
-      
-      Output: true
-      ```
+3. In this step, we will be creating a json file to act as our database and hold data submitted from our Front-end application once a user clicks on the **Add** button.
+      + Navigate to the `backend` directory. **Hint:** This is the directory that only contains package.json, package-lock.json, and index.js files.
+        1. Create a new file called `database.json` out of which we'll store the data received from the front-end by running this command: `touch database.json`\
+           **Note:** If this command doesn't work, look into creating the file thru a file explorer.
+      + Navigate to `backend/database.json`
+        1. Implement the code snippet provided below:
+           ```
+           []
+           ```
+      + The file structure of your project should now look similar to what is shown on the screenshot below:
+        <img width="302" alt="Screen Shot 2022-06-23 at 11 27 59 AM" src="https://user-images.githubusercontent.com/57464095/175369370-5a323053-deff-43a3-ad1c-bca2918135f8.png">
 
-## Testing
-Upon completion of Week 2 Lab Project, all the necessary components and functions should be implemented in order to successfully complete the test cases mentioned below:
+### Todo List APP (Front-End)
+1. In this step, we will be implementing axios in order to submit requests to the Express Application as well as to receive a response.
+      + Navigate to our project's root directory and run the following command w/in the terminal. **Hint:** Essentially, this is the directory where our `src` and `public` folders are located.
+        1. Run the following command to install Axios as a dependency: `npm install axios`
+      + Navigate to `src/component/AddTodo.js`
+        1. Import the Axios library at the top of our file:
+           ```
+           import Axios from "axios";
+           ```
+        2. 
+
+## Running Application
+Upon completion of Week 4 Lab Project, all the necessary components and functions should be implemented in order to successfully complete the test cases mentioned below:
 + Add Button Componenet adds task to list (on click)
 + Add Button Componenet doesn't add blank task to list (on click)
 + Add Button Componenet doesn't add duplicate task to list (on click)
 + Checkbox Button component removes task from list (on click)
 
-
-Note: Material UI components (and other libraries) render as HTML components under the hood, so using Material UI's TextField would still render in the DOM as an Input element and pass the tests for this lab.
-
 ## Pre-session Material
 Here is a [**link**](https://ibm.ent.box.com/file/969593458868?s=cj7tfykcxop5kfaz5b18dszfcfz0ac1e) to the pre-session material that was provided to you earlier.
-
-
-# Project Week 3 To-do list application (Cont.)
-## Introduction
-As of now, you have completed Project Week 2 and should now have a React Application Todo List Application that can add and delete unique tasks. For Project Week 3 we will finish up the frontend and make our own unit tests to make sure out App is working properly  We encourage you to take a unique approach to this lab as there is no one right answer. 
-- [Material Design](https://material.io/design/introduction) is a design system that can guide you on what UI decisions to make if you would like to explore best practices, but functionality is the key focus of the lab.
-- No back-end is required for this lab, all data (tasks) should live in the front-end.
