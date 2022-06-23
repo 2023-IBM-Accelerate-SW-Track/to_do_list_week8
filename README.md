@@ -30,10 +30,58 @@ Implementation requirements:
         5. The file structure of your project should now look similar to what is shown on the screenshot below:
            <img width="299" alt="Screen Shot 2022-06-23 at 6 25 55 AM" src="https://user-images.githubusercontent.com/57464095/175310108-65d0525c-c0b4-4432-8c12-a01ce7a0c05e.png">
            
-2. In this step, we will be adding the checkbox feature to correspond to a task being completed
-      + Navigate to `src/component/todos.js`
-        1. If not present, import Checkbox from the material UI library
-        2. Within the ListItemButton component, Add a Checkbox component before the ListItemText component with a `style` property set to `paddingLeft:0` and a `color` property set to `primary`. **Hint:** `color` is a property of its own and not a property of `style`.
+2. In this step, we will be using Express to create a simple web server that will then be ran on a specified port.\
+   **Note:** As you follow along w/ these sub-steps, place each snippet of code below the other.
+      + Navigate to `backend/index.js`
+        1. Implement the snippet code provided below:
+           ```
+           const express = require("express"),
+                  app = express(),
+                  port = process.env.PORT || 8080,
+                  cors = require("cors");
+           const bodyParser = require('body-parser');
+           const fs = require("fs");
+           ```
+        2. Implement the snippet code provided below:
+           ```
+           app.use(cors());
+           app.use(bodyParser.json({ extended: true }));
+           app.listen(port, () => console.log("Backend server live on " + port));
+           ```
+        3. Implement the snippet code provided below:
+           ```
+           app.get("/", (req, res) => {
+           res.send({ message: "Connected to Backend server!" });
+           });
+           ```
+         4. Implement the snippet code provided below:
+            ```
+            app.post("/add/item", addItem)
+            ```
+         5. Implement the snippet code provided below:
+            ```
+            function addItem (request, response) {
+            let task = request.body.jsonObject.task
+            let curDate = request.body.jsonObject.currentDate
+            let dueDate = request.body.jsonObject.dueDate
+            var newTask = {
+              Task: task,
+              Current_date: curDate,
+              Due_date: dueDate
+            }
+            const jsonString = JSON.stringify(newTask)
+
+            var data = fs.readFileSync('database.json');
+            var json = JSON.parse(data);
+            json.push(newTask);
+            fs.writeFile("database.json", JSON.stringify(json), function(err, result) {
+              if (err) { console.log('error', err) }
+              else { console.log('Successfully wrote to file') }
+            });
+            response.send(200)
+            }
+            ```
+           
 3. In this step, we will be adding the delete feature which will remove an item from the Todo list once it is complete (user clicks on checkbox button)
       + Navigate to `src/pages/Home.js`
         1. Implement the code snippet below for the deleteTodo() function before or after the addTodo() function\
