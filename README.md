@@ -15,30 +15,21 @@ Implementation requirements:
 
 ## Instructions
 
-### TO-DO List APP
-1. In this step, we will be adding the feature to display the date and time an item was added along with its task to the user. Also, we will be implementing a new component to display each item in the Todo list.
-      + Navigate to `src/component/AddTodo.js`
-        1. In the Constructor method, add a new key w/ the name `date` set to an empty string to represent the current date 
-        2. In the handleChange function, place the newly created `date` key and update the value using `Date().toLocaleString('en-US')` method
-        3. In the handleSubmit function, make sure to set the newly created `date` key back to an empty string after passing the user values to the addTodo function
-      + Navigate to `src/component/todos.js`
-        1. If not present, import ListItemButton and ListItemText components from the material UI library
-        2. Within the Card component, substitute the CardContent component with a ListItemButton Component
-            + **Before:**
-               ```
-                  <CardContent>
-                    <span style={{ padding: "50px" }}>{todo.content}</span>
-                  </CardContent>
-               ```
-            + **After:**
-               ```
-                  <ListItemButton component="a" href="#simple-list">
-                    <ListItemText primary={todo.content}/>
-                  </ListItemButton>
-                ```
-        3. Within the ListItemText component, add the `secondary` property next to the `primary` property to display the date for each task
-        4. (optional) Add `style={{marginTop:10}}` to the Card component to give space between each item in the Todo list and avoid item cards from overlapping each other
-
+### Express APP (Backend)
+1. In this step, we will be going thru the process of creating an Express application w/ in our Todo List Application. **Note:** From here on out, the term Backend will correspond to our Express Application, Front-end will correspond to our Todo List Application, and vice versa.
+      + Navigate to our project's `root` directory and run the following command w/in the terminal. **Hint:** Essentially, this is the directory where our `src` and `public` folders are located.
+        1. Create a new folder called `backend` that will essentially host our Express application by running the following command: `mkdir backend`
+      + Navigate to the newly created `backend` folder and run the following commands w/in the terminal. **Hint:** Currently, this directory should be empty with no such sub-folders or files present.
+        1. Run the following command to initialize your directory with some basic information: `npm init`\
+           **Note:** Accept all default configuration values.
+        2. Run the following command to install Express as a dependency: `npm install express`
+        3. Run the following command to install cors as a dependency: `npm install cors`\
+           **Note:** Cors allows us to relax the security applied to an API and you can learn more about this module [**here**](https://www.section.io/engineering-education/how-to-use-cors-in-nodejs-with-express/)
+        5. Create a new file called `index.js` out of which we'll run our Express server by running this command: `touch index.js`\
+           **Note:** If this command doesn't work, look into creating the file thru a file explorer.
+        5. The file structure of your project should now look similar to what is shown on the screenshot below:
+           <img width="299" alt="Screen Shot 2022-06-23 at 6 25 55 AM" src="https://user-images.githubusercontent.com/57464095/175310108-65d0525c-c0b4-4432-8c12-a01ce7a0c05e.png">
+           
 2. In this step, we will be adding the checkbox feature to correspond to a task being completed
       + Navigate to `src/component/todos.js`
         1. If not present, import Checkbox from the material UI library
