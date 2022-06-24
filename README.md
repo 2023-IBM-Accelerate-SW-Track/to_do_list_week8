@@ -19,9 +19,9 @@ Implementation requirements:
 1. In this step, we will be going thru the process of creating an Express application w/ in our Todo List Application. **Note:** From here on out, the term Backend will correspond to our Express Application, Front-end will correspond to our Todo List Application, and vice versa.
       + Navigate to our project's root directory and run the following command w/in the terminal. **Hint:** Essentially, this is the directory where our `src` and `public` folders are located.
         1. Create a new folder called `backend` that will essentially host our Express application by running the following command: `mkdir backend`
-      + Navigate to the newly created `backend` folder and run the following commands w/in the terminal. **Hint:** Currently, this directory should be empty with no such sub-folders or files present.
+      + Navigate to the newly created `backend` folder and run the following commands w/in the terminal. **Hint:** Currently, this directory should be empty with no such sub-folders or files present. **Hint** Run the command `cd backend` or similar to change directory.
         1. Run the following command to initialize your directory with some basic information: `npm init`\
-           **Note:** Accept all default configuration values.
+           **Note:** Accept all default configuration values by pressing **Return** or **Enter** until fully complete.
         2. Run the following command to install Express as a dependency: `npm install express`
         3. Run the following command to install cors as a dependency: `npm install cors`\
            **Note:** Cors allows us to relax the security applied to an API and you can learn more about this module [**here**](https://www.section.io/engineering-education/how-to-use-cors-in-nodejs-with-express/)
