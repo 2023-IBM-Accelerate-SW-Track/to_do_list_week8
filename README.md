@@ -135,11 +135,29 @@ Implementation requirements:
            **Note:** This snippet of code is making a **POST** request the `addItem` function located in our Express Application and returning a response message. Make sure to replace `<port>` with the port number that was used in the Express Application process such as **8080** or **3001**.
 
 ## Running Application
-Upon completion of Week 4 Lab Project, all the necessary components and functions should be implemented in order to successfully complete the test cases mentioned below:
-+ Add Button Componenet adds task to list (on click)
-+ Add Button Componenet doesn't add blank task to list (on click)
-+ Add Button Componenet doesn't add duplicate task to list (on click)
-+ Checkbox Button component removes task from list (on click)
+Upon completion of Week 4 Lab Project, all the necessary components and functions should be implemented in order to successfully send and receive data between the Client Side (Todo List Application) and Server side (Express Application). Now we will go thru the steps in simplifying the process of setting up and and running your applications. 
+
+1. Navigate to `package.json` file located in our project's root directory. **Hint:** Essentially, this is the directory where our `src` and `public` folders are located.
+   + Add the following scripts to the `scripts` property and save the file.
+     ```
+     "install-backend": "cd backend && npm install",
+     "install-both": "npm install & npm run install-backend",
+     "backend": "cd backend && node backend.js",
+     "start-both": "npm run backend & npm start"
+     ```
+   + The `package.json` file `scripts` property should now look similar to the screen shot shown below:
+     ![Screen Shot 2022-06-24 at 12 31 47 AM](https://user-images.githubusercontent.com/57464095/175486138-37ee5abb-1409-4305-aeaa-eb821dff3781.png)
+
+     **Note:** This configuration will allow us install all dependencies needed for both our Front-end and Backend application as well as running both application from one directory instead of creating multiple terminals.
+     
+2. Navigate to our project's root directory once again and run the following commands w/in the terminal. **Hint:** Essentially, this is the directory where our `src` and `public` folders are located.
+  + Run `npm run install-both` to install all dependencies for both applications (Todo List Application and Express Application)
+  + Run `npm run start-both` to start up both applications (Todo List Application and Express Application)
+
+**Optional:** To Test and see if your Express Application was implemented correctly, run the following command: `npm run backend`\
+**Note:** Make sure all processes are terminated before running this command.
+  + There should be no error message and a message similar to the screenshot provided below should be displayed:
+    ![Screen Shot 2022-06-24 at 12 40 20 AM](https://user-images.githubusercontent.com/57464095/175487997-f8b2bd8c-8ee6-41bb-83da-f82f39c92dea.png)
 
 ## Pre-session Material
 Here is a [**link**](https://ibm.ent.box.com/file/969593458868?s=cj7tfykcxop5kfaz5b18dszfcfz0ac1e) to the pre-session material that was provided to you earlier.
