@@ -121,7 +121,7 @@ Implementation requirements:
               dueDate: <value representing the date/time task is due>
            };
            ```
-           **Note:** This snippet of code is creating a json object that will be used as a body request to be sent to the `addItem` function located in our Express application. Make sure to replace the comments w/ the updated values for the following remaining keys: `task`, `currentDate`, and `dueDate`.
+           **Note:** This snippet of code is creating a json object that will be used as a body request to be sent to the `addItem` function located in our Express application. Place this code snippet below the code snippet above and make sure to replace the comments w/ the updated values for the following remaining keys: `task`, `currentDate`, and `dueDate`.
            ```
            Axios({
               method: "POST",
