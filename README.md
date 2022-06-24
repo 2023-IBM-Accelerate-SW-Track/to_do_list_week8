@@ -66,10 +66,12 @@ Implementation requirements:
          5. Implement the code snippet provided below:
             ```
             function addItem (request, response) {
+            let id = request.body.jsonObject.id
             let task = request.body.jsonObject.task
             let curDate = request.body.jsonObject.currentDate
             let dueDate = request.body.jsonObject.dueDate
             var newTask = {
+              ID: id,
               Task: task,
               Current_date: curDate,
               Due_date: dueDate
