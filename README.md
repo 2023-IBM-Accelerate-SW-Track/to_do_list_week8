@@ -114,9 +114,9 @@ Implementation requirements:
            ```
            const jsonObject = {
               id: this.state.id,
-              task: <key representing the task content>,
-              currentDate: <key representing the date/time task was added>,
-              dueDate: <key representing the date/time task is due>
+              task: <value representing the task content>,
+              currentDate: <value representing the date/time task was added>,
+              dueDate: <value representing the date/time task is due>
            };
            ```
            **Note:** This snippet of code is creating a json object that will be used as a body request to be sent to the `addItem` function located in our Express application. Make sure update the values for the following remaining keys: `task`, `currentDate`, and `dueDate`.
@@ -142,7 +142,7 @@ Upon completion of Week 4 Lab Project, all the necessary components and function
      ```
      "install-backend": "cd backend && npm install",
      "install-both": "npm install & npm run install-backend",
-     "backend": "cd backend && node backend.js",
+     "backend": "cd backend && node index.js",
      "start-both": "npm run backend & npm start"
      ```
    + The `package.json` file `scripts` property should now look similar to the screen shot shown below:
