@@ -26,7 +26,7 @@ Implementation requirements:
         3. Run the following command to install cors as a dependency: `npm install cors`\
            **Note:** Cors allows us to relax the security applied to an API and you can learn more about this module [**here**](https://www.section.io/engineering-education/how-to-use-cors-in-nodejs-with-express/)
         5. Create a new file called `index.js` out of which we'll run our Express server by running this command: `touch index.js`\
-           **Note:** If this command doesn't work, look into creating the file thru a file explorer.
+           **Note:** If this command doesn't work, look into creating the file thru a file explorer or VS code.
          
       + The file structure of your project should now look similar to what is shown on the screenshot below:
         <img width="299" alt="Screen Shot 2022-06-23 at 6 25 55 AM" src="https://user-images.githubusercontent.com/57464095/175310108-65d0525c-c0b4-4432-8c12-a01ce7a0c05e.png">
@@ -38,27 +38,31 @@ Implementation requirements:
            ```
            const express = require("express"),
                   app = express(),
-                  port = process.env.PORT || 8080,
+                  port = process.env.PORT || <port>,
                   cors = require("cors");
            const bodyParser = require('body-parser');
            const fs = require("fs");
            ```
+           **Note:** This snippet of code is importing external modules and setting the environment variables. Make sure to replace `<port>` with a port number of your choosing such as **8080** or **3001** keep note of this port number for future usage. Click on the following links [**express**](https://expressjs.com/en/5x/api.html), [**cors**](https://expressjs.com/en/resources/middleware/cors.html), [**body-parser**](https://expressjs.com/en/resources/middleware/body-parser.html), and [**fs**](https://nodejs.dev/learn/the-nodejs-fs-module) to learn more about these modules and their usage.
         2. Implement the code snippet provided below:
            ```
            app.use(cors());
            app.use(bodyParser.json({ extended: true }));
            app.listen(port, () => console.log("Backend server live on " + port));
            ```
+           **Note:** This snippet of code sets up our express application and returns a message back to console once our application is running.
         3. Implement the code snippet provided below:
            ```
            app.get("/", (req, res) => {
            res.send({ message: "Connected to Backend server!" });
            });
            ```
+           **Note:** This snippet of code returns a message once a **GET** request to the specified route is made.
          4. Implement the code snippet provided below:
             ```
             app.post("/add/item", addItem)
             ```
+            **Note:** This snippet of code makes a call the `addItem` function once a **POST** request to the specified route is made.
          5. Implement the code snippet provided below:
             ```
             function addItem (request, response) {
@@ -82,16 +86,18 @@ Implementation requirements:
             response.send(200)
             }
             ```
+            **Note:** This snippet of code takes in a request body from the Todo List Application which represents a `todo` item. The body is then converted into a new json object called `newTask` to represent the new `todo` item. The new json object is finally appended to a json list located in a file called `database.json` to represent our `todos` list.
            
 3. In this step, we will be creating a json file to act as our database and hold data submitted from our Front-end application once a user clicks on the **Add** button.
       + Navigate to the `backend` directory. **Hint:** This is the directory that only contains package.json, package-lock.json, and index.js files.
         1. Create a new file called `database.json` out of which we'll store the data received from the front-end by running this command: `touch database.json`\
-           **Note:** If this command doesn't work, look into creating the file thru a file explorer.
+           **Note:** If this command doesn't work, look into creating the file thru a file explorer or VS code.
       + Navigate to `backend/database.json`
         1. Implement the code snippet provided below:
            ```
            []
            ```
+           **Note:** The square brackets must be placed within this json file or we will receive an error when trying to append `todo` items within a list. Square brackets corresponds to an array.
       + The file structure of your project should now look similar to what is shown on the screenshot below:
         <img width="302" alt="Screen Shot 2022-06-23 at 11 27 59 AM" src="https://user-images.githubusercontent.com/57464095/175369370-5a323053-deff-43a3-ad1c-bca2918135f8.png">
 
@@ -113,6 +119,7 @@ Implementation requirements:
               dueDate: <key representing the date/time task is due>
            };
            ```
+           **Note:** This snippet of code is creating a json object that will be used as a body request to be sent to the `addItem` function located in our Express application. Make sure update the values for the following remaining keys: `task`, `currentDate`, and `dueDate`.
            ```
            Axios({
               method: "POST",
@@ -125,6 +132,7 @@ Implementation requirements:
               console.log(res.data.message);
            });
            ```
+           **Note:** This snippet of code is making a **POST** request the `addItem` function located in our Express Application and returning a response message. Make sure to replace `<port>` with the port number that was used in the Express Application process such as **8080** or **3001**.
 
 ## Running Application
 Upon completion of Week 4 Lab Project, all the necessary components and functions should be implemented in order to successfully complete the test cases mentioned below:
