@@ -162,4 +162,4 @@ Upon completion of Week 4 Lab Project, all the necessary components and function
     ![Screen Shot 2022-06-24 at 12 40 20 AM](https://user-images.githubusercontent.com/57464095/175487997-f8b2bd8c-8ee6-41bb-83da-f82f39c92dea.png)
 
 ## Pre-session Material
-Here is a [**link**](https://ibm.ent.box.com/file/969593458868?s=cj7tfykcxop5kfaz5b18dszfcfz0ac1e) to the pre-session material that was provided to you earlier.
+Here is a [**link**](https://ibm.ent.box.com/file/975198401278) to the pre-session material that was provided to you earlier.
