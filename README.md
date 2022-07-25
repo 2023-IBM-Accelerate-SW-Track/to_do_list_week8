@@ -24,7 +24,7 @@ docker build -f Dockerfile -t ibmaccelerate/cloudnative:frontend_v1 .
 
 ## Instructions
 
-### Deploy and configure Kubernetes service cluster from IBM cloud catalog
+### Deploy and configure Kubernetes service cluster from IBM Cloud Catalog
 
 1. Log in to [cloud.ibm.com](https://cloud.ibm.com) using your IBM cloud ID.
 
@@ -62,12 +62,12 @@ A new tab should open. Leave it open since we will use it in the next steps.
 
 <img width="1438" alt="IBM Cloud Shell - Commands" src="images/ibmcloud_shell.png">
 
-### Deploy Todo List APP (Front-End) microservice of Kubernetes cluster
+### Deploy the to-do list application (frontend) microservice of Kubernetes cluster
 
 #### Deploy the application from `IBM Cloud Shell` of your deployed Kubernetes cluster.
 At this point, it is assumed that you have a terminal window opened and that you are connected to the clusters (steps in the previous section)/
 
-1. Clone the to-do-list week 7 project using your IBM Cloud **Shell**. **Note** You would need pass github personal access token as the password when prompted.
+1. Clone the to-do-list week 7 project using your IBM Cloud **Shell**. **Note** You would need to pass GitHub personal access token as the password when prompted.
 
    ```
    git clone <your-to-do-list-project-URL>
@@ -84,7 +84,7 @@ At this point, it is assumed that you have a terminal window opened and that you
     mkdir deployment-templates
     ```
 
-  - Create the to-do list Deployment and Service templates inside the above-created folder with below steps.
+  - Create the to-do list Deployment and Service templates inside the above-created folder with the below steps.
     - Create todolist-deployment.yaml and copy the contents from the project and save.
 
     ```
@@ -149,12 +149,12 @@ At this point, it is assumed that you have a terminal window opened and that you
      kubectl apply -f todolist-deployment.yaml
      ```
 
-   - Validate if the Deployment is running with below commands.
+   - Validate if the Deployment is running with the below commands.
 
      ```
      kubectl get deployments
      ```
-     Output will look something like below. **Note** If status shows as Ready 0/1, it may take a few min for status to go to Ready 1/1, you can run the command again after few minutes to check the status.
+     The output will look something like the below example. **Note:** If the status shows as Ready 0/1, it may take a few min for the status to go to Ready 1/1. You can rerun the command after a few minutes to check the status.
      ```
      NAME         READY   UP-TO-DATE   AVAILABLE   AGE
      to-do-list   1/1     1            1           31m
@@ -163,7 +163,7 @@ At this point, it is assumed that you have a terminal window opened and that you
      ```
      kubectl get pods
      ```
-     The output will look something like the below example. **Note** If status shows as `ContainerCreating`, it may take a few min for status to become running, you can run the command again after few minutes to check the status.
+     The output will look something like the below example. **Note:** If the status shows as `ContainerCreating`, it may take a few min for the status to become running. You can rerun the command after a few minutes to check the status.
 
      ```
      NAME                          READY   STATUS    RESTARTS   AGE
@@ -187,7 +187,7 @@ At this point, it is assumed that you have a terminal window opened and that you
  **Note:** The above commands can also be executed from your local terminal window.
 
 
-### Access your to-do-list frontend application
+### Access your to-do list frontend application
 
 Upon completion of the Deployment of the to-do list frontend application on your IBM Cloud Kubernetes cluster, access the application on your browser using the below steps.
 
@@ -217,7 +217,7 @@ Example:
 <img width="1435" alt="Screen Shot 2022-07-25 at 10 27 54 AM" src="https://media.github.ibm.com/user/32795/files/8474c100-0c04-11ed-8fa4-3c143efebaf3">
 
 
-## Pre-session Material
+## Pre-session material
 
 1. Cloud-Native
    - [Overview](https://cloudnative101.dev/concepts/cloud-native/)
