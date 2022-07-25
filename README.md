@@ -11,7 +11,7 @@ As of now, you have completed Project Week 6 and should now have an understandin
 ```
 docker build -f Dockerfile -t ibmaccelerate/cloudnative:frontend_v1 .
 ```
-- Image is pushed to docker hub. You will be using this already built image to deploy on your cluster.
+- The Image is pushed to the docker hub. You will be using this already built image to deploy on your cluster.
 
 ## Prerequisites
 + Create IBM cloud ID using the instructions and IBM Cloud Feature Code shared via email.
@@ -34,7 +34,10 @@ docker build -f Dockerfile -t ibmaccelerate/cloudnative:frontend_v1 .
 <img width="1435" alt="Screen Shot 2022-07-25 at 10 14 15 AM" src="https://media.github.ibm.com/user/32795/files/9ce3dc00-0c02-11ed-9e4a-6b6ef329ceac">
 
 6. Once the deployment is complete and cluster is ready,  Open the `IBM cloud shell` from the header options.
+
 <img width="1438" alt="Screen Shot 2022-07-25 at 10 18 56 AM" src="https://media.github.ibm.com/user/32795/files/6bb7db80-0c03-11ed-9c2f-44d3ee89e537">
+
+<img width="994" alt="Screen Shot 2022-07-25 at 1 48 19 PM" src="https://media.github.ibm.com/user/32795/files/746ada80-0c20-11ed-98e0-2ce9f9bc0244">
 
 **Note:** If you would like to access the cluster anytime later access it by going to the left hamburger menu --> Resource List --> Select your clustername under clusters.
 
@@ -48,7 +51,8 @@ docker build -f Dockerfile -t ibmaccelerate/cloudnative:frontend_v1 .
 
 <img width="772" alt="Screen Shot 2022-07-25 at 10 24 24 AM" src="https://media.github.ibm.com/user/32795/files/f698d600-0c03-11ed-9ca1-b2194f19e219">
 
-10. You can run the `connect via CLI` instructions in your `IBM cloud shell` which you have opened earlier (or) optionally from your terminal window. **Note:** If you are going to run the instructions from the terminal window then you would need ibmcloud CLI and kubectl installed on your machine mentioned optional in `Prerequisite` section of this document.
+10. Run the `connect via CLI` instructions in your `IBM cloud shell` which you have opened earlier. Use your IBM cloud ID credetials for login. (or) Optionally you can run these from your terminal window if you would like to run deploy instructions from your terminal.
+**Note:** If you are going to run the instructions from the terminal window then you would need ibmcloud CLI and kubectl installed on your machine mentioned optional in `Prerequisite` section of this document.
 
 
 ### Deploy Todo List APP (Front-End) microservice of kubernetes cluster
