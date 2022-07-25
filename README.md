@@ -5,8 +5,8 @@
 As of now, you have completed Project Week 6 and should now have an understanding of the development of fully functional to-do-list Application. For Project Week 7, you will go thru the process of understanding containerising the microservice and process of deploying the to-do-list frontend microservice component on a IBM cloud cluster.
 
 ## Prerequisites
-+ Created a IBM cloud ID using the instructions and IBM Cloud Feature Code shred via email.
-+ **Optional:**:
++ Create IBM cloud ID using the instructions and IBM Cloud Feature Code shared via email.
++ **Optional:**: Below is required only if you would like to deploy the application from your local terminal.
   - Install kubectl on your machine using instructions [**here**](https://kubectl.docs.kubernetes.io/installation/kubectl/)
   - If you would like to run the install instructions from your local machine terminal window, you would need to install `IBM cloud CLI` using Steps 1 to step 3 instructions [**here**](https://cloud.ibm.com/docs/containers?topic=containers-cs_cli_install)
 
@@ -14,19 +14,24 @@ As of now, you have completed Project Week 6 and should now have an understandin
 
 ### Deploy and configure kubernetes service cluster from IBM cloud catalog
 
-1. Login to cloud.ibm.com using your IBM cloud ID.
+1. Login to [cloud.ibm.com](https://cloud.ibm.com) using your IBM cloud ID.
 
 3. Go to the IBM cloud catalog and search for kubernetes service.
 
 <img width="1431" alt="Screen Shot 2022-07-25 at 9 56 51 AM" src="https://media.github.ibm.com/user/32795/files/1f1ed100-0c00-11ed-9065-e5298e28b895">
 
-4. Deploy kubernetes service by selecting the free plan to create a kubernetes cluster.
+4. Deploy kubernetes service by providing clustername, selecting the free plan to create a kubernetes cluster.
 
 <img width="1435" alt="Screen Shot 2022-07-25 at 10 14 15 AM" src="https://media.github.ibm.com/user/32795/files/9ce3dc00-0c02-11ed-9e4a-6b6ef329ceac">
 
 6. Once the deployment is complete and cluster is ready,  Open the `IBM cloud shell` from the header options.
-
 <img width="1438" alt="Screen Shot 2022-07-25 at 10 18 56 AM" src="https://media.github.ibm.com/user/32795/files/6bb7db80-0c03-11ed-9c2f-44d3ee89e537">
+
+**Note:** If you would like to access the cluster anytime later access it by going to the left hamburger menu --> Resource List --> Select your clustername under clusters.
+
+<img width="386" alt="Screen Shot 2022-07-25 at 11 31 04 AM" src="https://media.github.ibm.com/user/32795/files/4760fc80-0c0d-11ed-8f96-9f595d85b15c">
+
+<img width="506" alt="Screen Shot 2022-07-25 at 11 31 21 AM" src="https://media.github.ibm.com/user/32795/files/5182fb00-0c0d-11ed-8f74-63b2acfcb176">
 
 8. Connect to the cluster for deploying the to-do-list frontend application by following instructions from ```Connect via CLI``` from Actions drop down.
 
