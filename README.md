@@ -2,7 +2,16 @@
 # Project Week 7: Deploying to-do list frontend microservice on a cloud cluster
 
 ## Introduction
-As of now, you have completed Project Week 6 and should now have an understanding of the development of fully functional to-do-list Application. For Project Week 7, you will go thru the process of understanding containerising the microservice and process of deploying the to-do-list frontend microservice component on a IBM cloud cluster.
+As of now, you have completed Project Week 6 and should now have an understanding of the regular development of a fully functional to-do-list Application. For Project Week 7, you will go through the process of understanding containerising the microservice and process of deploying the to-do-list frontend microservice component on a IBM cloud cluster.
+
+## Containerizing microservice
+- Developing in microservices is the art of breaking down the old model of building one large application, i.e. a “monolithic” application, and forming a new model where specialized, cloud-hosted sub applications—each charged with a very specific task—work together. For this, we have added a `frontendserver.js` using express.
+- Containers are a standard way to package an application and all its dependencies so that it can be moved between environments and run without change. Docker is one of the most popular Containerization platforms which allows you to develop, deploy, and run application inside containers. We have created a Dockerfile to containerize the to-do-list frontend application. **Note** : Below commands are just for your understanding.
+- We have then built the docker image and tagged it using below command.
+```
+docker build -f Dockerfile -t ibmaccelerate/cloudnative:frontend_v1 .
+```
+- Image is pushed to docker hub. You will be using this already built image to deploy on your cluster.
 
 ## Prerequisites
 + Create IBM cloud ID using the instructions and IBM Cloud Feature Code shared via email.
@@ -39,18 +48,18 @@ As of now, you have completed Project Week 6 and should now have an understandin
 
 <img width="772" alt="Screen Shot 2022-07-25 at 10 24 24 AM" src="https://media.github.ibm.com/user/32795/files/f698d600-0c03-11ed-9ca1-b2194f19e219">
 
-10. You can run the `connect via CLI` instructions in your IBM cloud shell which you have opened earlier (or) optionally from your terminal window. **Note:** If you are going to run the instructions from the terminal window then you would need ibmcloud CLI and kubectl installed on your machine mentioned optional in `Prerequisite` section of this document.
+10. You can run the `connect via CLI` instructions in your `IBM cloud shell` which you have opened earlier (or) optionally from your terminal window. **Note:** If you are going to run the instructions from the terminal window then you would need ibmcloud CLI and kubectl installed on your machine mentioned optional in `Prerequisite` section of this document.
 
 
 ### Deploy Todo List APP (Front-End) microservice of kubernetes cluster
 
 #### Deploy the application from `IBM cloud shell` of your deployed kubernetes cluster.
-1. Go to the IBM cloud shell and connect to the cluster by following the instructions from ```Connect via CLI``` from Actions drop down from the instructions above.
-2. Once the above step is complete, clone the to-do-list week7 project.
+1. Go to the `IBM cloud shell` and connect to the cluster by following the instructions from ```Connect via CLI``` from Actions drop down from the instructions above.
+2. Once the above step is complete, clone the to-do-list week7 project on your `IBM cloud shell`.
 
    ``` git clone to-do-list-project-URL```
 
-   If you have issues cloning the github project, follow the below steps.
+   If you have issues cloning the github project, follow the below steps on your `IBM cloud shell`.
      - Create a folder for deployment manifests.
 
        ```mkdir deployment-templates```
@@ -78,7 +87,7 @@ As of now, you have completed Project Week 6 and should now have an understandin
               spec:
                 containers:
                 - name: to-do-list
-                  image: sghegde/accelerate-cloudnative22:frontend_v1
+                  image: ibmaccelerate/cloudnative:frontend_v1
                   imagePullPolicy: Always
                   ports:
                   - containerPort: 8080
@@ -108,8 +117,9 @@ As of now, you have completed Project Week 6 and should now have an understandin
                 nodePort: 30007
           EOF
           ```
+**Note** : Frontend deployment image `ibmaccelerate/cloudnative:frontend_v1` can be found in the `todolist-deployment.yaml` file.
 
-3. Deploy the to-do-list frontend application on your cluster using kubectl
+3. Deploy the to-do-list frontend application on your cluster using kubectl on your `IBM cloud shell`
    - Create the deployment. Execute the below command from `deployment-templates` directory.
      ```
      kubectl apply -f todolist-deployment.yaml
@@ -147,7 +157,7 @@ As of now, you have completed Project Week 6 and should now have an understandin
     NAME               TYPE           CLUSTER-IP      EXTERNAL-IP   PORT(S)          AGE
     todolist-service   LoadBalancer   172.21.150.79   <pending>     8080:30178/TCP   18s
     ```
-
+ **Note:** If you are going to run the instructions from the terminal window then follow all these instructions on your terminal window.
 
 ### Access your to-do-list frontend application
 

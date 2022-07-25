@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: to-do-list
-        image: sghegde/accelerate-cloudnative22:frontend_v1
+        image: ibmaccelerate/cloudnative:frontend_v1
         imagePullPolicy: Always
         ports:
         - containerPort: 8080
