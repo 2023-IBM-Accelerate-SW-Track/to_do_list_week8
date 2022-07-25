@@ -1,165 +1,186 @@
-# Project Week 4: To-do list application (Cont.)
+
+# Project Week 7: Deploying to-do list frontend microservice on a cloud cluster
+
 ## Introduction
-As of now, you have completed Project Week 3 and should now have a fully functional React Application with the ability to navigate to an **About me** page and a **Home** page hosting the Todo List Application. The Todo List Application itself allows users to provide a task w/ a due date, create a list w/ those user inputs to be displayed on a webpage, mark those task as complete and remove them from the list, and etc. Currently, all data which is essentially our tasks in this case lives in the front-end (Todo List Application). Everytime we refresh the page or restart our application that data is lost. This is where the backend component comes into play. The backend component will allow us to communicate to our front-end component (Todo List Application) using express and save our data inside a database (json file) where data will not be lost after a page refresh or application restart. For Project Week 4, you will go thru the process of initializing and creating a backend component, using express to communicate with the front-end component, and using axios to communicate with backend component.
+As of now, you have completed Project Week 6 and should now have an understanding of the development of fully functional to-do-list Application. For Project Week 7, you will go thru the process of understanding containerising the microservice and process of deploying the to-do-list frontend microservice component on a IBM cloud cluster.
 
-## Requirements
-Feature requirements (Week 4 task is complete when you):
-+ Create and Initialize an Express application (Backend)
-+ Create a connection between the Backend and Front-end
-+ Create a json file to represent your database
-+ Create a **POST** request to submit data to a json file
-
-Implementation requirements:
-+ Use [**Express**](https://www.npmjs.com/package/express) w/in the backend component
-+ Use [**Axios**](https://www.npmjs.com/package/axios) w/in the front-end component (Todo List Application)
+## Prerequisites
++ Created a IBM cloud ID using the instructions and IBM Cloud Feature Code shred via email.
++ **Optional:**:
+  - Install kubectl on your machine using instructions [**here**](https://kubectl.docs.kubernetes.io/installation/kubectl/)
+  - If you would like to run the install instructions from your local machine terminal window, you would need to install `IBM cloud CLI` using Steps 1 to step 3 instructions [**here**](https://cloud.ibm.com/docs/containers?topic=containers-cs_cli_install)
 
 ## Instructions
 
-### Express APP (Backend)
-1. In this step, we will be going thru the process of creating an Express application w/ in our Todo List Application. **Note:** From here on out, the term Backend will correspond to our Express Application, Front-end will correspond to our Todo List Application, and vice versa.
-      + Navigate to our project's root directory and run the following command w/in the terminal. **Hint:** Essentially, this is the directory where our `src` and `public` folders are located.
-        1. Create a new folder called `backend` that will essentially host our Express application by running the following command: `mkdir backend`
-      + Navigate to the newly created `backend` folder and run the following commands w/in the terminal. **Hint:** Currently, this directory should be empty with no such sub-folders or files present. **Hint** Run the command `cd backend` or similar to change directory.
-        1. Run the following command to initialize your directory with some basic information: `npm init`\
-           **Note:** Accept all default configuration values by pressing **Return** or **Enter** until fully complete.
-        2. Run the following command to install Express as a dependency: `npm install express`
-        3. Run the following command to install cors as a dependency: `npm install cors`\
-           **Note:** Cors allows us to relax the security applied to an API and you can learn more about this module [**here**](https://www.section.io/engineering-education/how-to-use-cors-in-nodejs-with-express/)
-        5. Create a new file called `index.js` out of which we'll run our Express server by running this command: `touch index.js`\
-           **Note:** If this command doesn't work, look into creating the file thru a file explorer or VS code.
-         
-      + The file structure of your project should now look similar to what is shown on the screenshot below:
-        <img width="299" alt="Screen Shot 2022-06-23 at 6 25 55 AM" src="https://user-images.githubusercontent.com/57464095/175310108-65d0525c-c0b4-4432-8c12-a01ce7a0c05e.png">
-           
-2. In this step, we will be using Express to create a simple web server that will then be ran on a specified port.\
-   **Note:** As you follow along w/ these sub-steps, place each snippet of code below the other.
-      + Navigate to `backend/index.js`
-        1. Implement the code snippet provided below:
-           ```
-           const express = require("express"),
-                  app = express(),
-                  port = process.env.PORT || <port>,
-                  cors = require("cors");
-           const bodyParser = require('body-parser');
-           const fs = require("fs");
-           ```
-           **Note:** This snippet of code is importing external modules and setting the environment variables. Make sure to replace `<port>` with a port number of your choosing such as **8080** or **3001** keep note of this port number for future usage. Click on the following links [**express**](https://expressjs.com/en/5x/api.html), [**cors**](https://expressjs.com/en/resources/middleware/cors.html), [**body-parser**](https://expressjs.com/en/resources/middleware/body-parser.html), and [**fs**](https://nodejs.dev/learn/the-nodejs-fs-module) to learn more about these modules and their usage.
-        2. Implement the code snippet provided below:
-           ```
-           app.use(cors());
-           app.use(bodyParser.json({ extended: true }));
-           app.listen(port, () => console.log("Backend server live on " + port));
-           ```
-           **Note:** This snippet of code sets up our express application and returns a message back to console once our application is running.
-        3. Implement the code snippet provided below:
-           ```
-           app.get("/", (req, res) => {
-           res.send({ message: "Connected to Backend server!" });
-           });
-           ```
-           **Note:** This snippet of code returns a message once a **GET** request to the specified route is made.
-         4. Implement the code snippet provided below:
-            ```
-            app.post("/add/item", addItem)
-            ```
-            **Note:** This snippet of code makes a call the `addItem` function once a **POST** request to the specified route is made.
-         5. Implement the code snippet provided below:
-            ```
-            function addItem (request, response) {
-            let id = request.body.jsonObject.id
-            let task = request.body.jsonObject.task
-            let curDate = request.body.jsonObject.currentDate
-            let dueDate = request.body.jsonObject.dueDate
-            var newTask = {
-              ID: id,
-              Task: task,
-              Current_date: curDate,
-              Due_date: dueDate
-            }
-            const jsonString = JSON.stringify(newTask)
+### Deploy and configure kubernetes service cluster from IBM cloud catalog
 
-            var data = fs.readFileSync('database.json');
-            var json = JSON.parse(data);
-            json.push(newTask);
-            fs.writeFile("database.json", JSON.stringify(json), function(err, result) {
-              if (err) { console.log('error', err) }
-              else { console.log('Successfully wrote to file') }
-            });
-            response.send(200)
-            }
-            ```
-            **Note:** This snippet of code takes in a request body from the Todo List Application which represents a `todo` item. The body is then converted into a new json object called `newTask` to represent the new `todo` item. The new json object is finally appended to a json list located in a file called `database.json` to represent our `todos` list.
-           
-3. In this step, we will be creating a json file to act as our database and hold data submitted from our Front-end application once a user clicks on the **Add** button.
-      + Navigate to the `backend` directory. **Hint:** This is the directory that only contains package.json, package-lock.json, and index.js files.
-        1. Create a new file called `database.json` out of which we'll store the data received from the front-end by running this command: `touch database.json`\
-           **Note:** If this command doesn't work, look into creating the file thru a file explorer or VS code.
-      + Navigate to `backend/database.json`
-        1. Implement the code snippet provided below:
-           ```
-           []
-           ```
-           **Note:** The square brackets must be placed within this json file or we will receive an error when trying to append `todo` items within a list. Square brackets corresponds to an array.
-      + The file structure of your project should now look similar to what is shown on the screenshot below:
-        <img width="302" alt="Screen Shot 2022-06-23 at 11 27 59 AM" src="https://user-images.githubusercontent.com/57464095/175369370-5a323053-deff-43a3-ad1c-bca2918135f8.png">
+1. Login to cloud.ibm.com using your IBM cloud ID.
 
-### Todo List APP (Front-End)
-1. In this step, we will be implementing axios in order to submit requests to the Express Application as well as to receive a response.
-      + Navigate to our project's root directory and run the following command w/in the terminal. **Hint:** Essentially, this is the directory where our `src` and `public` folders are located.
-        1. Run the following command to install Axios as a dependency: `npm install axios`
-      + Navigate to `src/component/AddTodo.js`
-        1. Import the Axios library at the top of our file:
-           ```
-           import Axios from "axios";
-           ```
-        2. In the handleSubmit function, implement the code snippets provided below before performing the **addTodo** action:
-           ```
-           const jsonObject = {
-              id: this.state.id,
-              task: <value representing the task content>,
-              currentDate: <value representing the date/time task was added>,
-              dueDate: <value representing the date/time task is due>
-           };
-           ```
-           **Note:** This snippet of code is creating a json object that will be used as a body request to be sent to the `addItem` function located in our Express application. Place this code snippet below the code snippet above and make sure to replace the comments w/ the updated values for the following remaining keys: `task`, `currentDate`, and `dueDate`.
-           ```
-           Axios({
-              method: "POST",
-              url: "http://localhost:<port>/add/item",
-              data: {jsonObject},
-              headers: {
-                 "Content-Type": "application/json"
-              }
-           }).then(res => {
-              console.log(res.data.message);
-           });
-           ```
-           **Note:** This snippet of code is making a **POST** request the `addItem` function located in our Express Application and returning a response message. Make sure to replace `<port>` with the port number that was used in the Express Application process such as **8080** or **3001**.
+3. Go to the IBM cloud catalog and search for kubernetes service.
 
-## Running Application
-Upon completion of Week 4 Lab Project, all the necessary components and functions should be implemented in order to successfully send and receive data between the Client Side (Todo List Application) and Server side (Express Application). Now we will go thru the steps in simplifying the process of setting up and and running your applications. 
+<img width="1431" alt="Screen Shot 2022-07-25 at 9 56 51 AM" src="https://media.github.ibm.com/user/32795/files/1f1ed100-0c00-11ed-9065-e5298e28b895">
 
-1. Navigate to `package.json` file located in our project's root directory. **Hint:** Essentially, this is the directory where our `src` and `public` folders are located.
-   + Add the following scripts to the `scripts` property and save the file.
+4. Deploy kubernetes service by selecting the free plan to create a kubernetes cluster.
+
+<img width="1435" alt="Screen Shot 2022-07-25 at 10 14 15 AM" src="https://media.github.ibm.com/user/32795/files/9ce3dc00-0c02-11ed-9e4a-6b6ef329ceac">
+
+6. Once the deployment is complete and cluster is ready,  Open the `IBM cloud shell` from the header options.
+
+<img width="1438" alt="Screen Shot 2022-07-25 at 10 18 56 AM" src="https://media.github.ibm.com/user/32795/files/6bb7db80-0c03-11ed-9c2f-44d3ee89e537">
+
+8. Connect to the cluster for deploying the to-do-list frontend application by following instructions from ```Connect via CLI``` from Actions drop down.
+
+<img width="692" alt="Screen Shot 2022-07-25 at 10 22 38 AM" src="https://media.github.ibm.com/user/32795/files/b76a8500-0c03-11ed-880d-de384099a449">
+
+<img width="772" alt="Screen Shot 2022-07-25 at 10 24 24 AM" src="https://media.github.ibm.com/user/32795/files/f698d600-0c03-11ed-9ca1-b2194f19e219">
+
+10. You can run the `connect via CLI` instructions in your IBM cloud shell which you have opened earlier (or) optionally from your terminal window. **Note:** If you are going to run the instructions from the terminal window then you would need ibmcloud CLI and kubectl installed on your machine mentioned optional in `Prerequisite` section of this document.
+
+
+### Deploy Todo List APP (Front-End) microservice of kubernetes cluster
+
+#### Deploy the application from `IBM cloud shell` of your deployed kubernetes cluster.
+1. Go to the IBM cloud shell and connect to the cluster by following the instructions from ```Connect via CLI``` from Actions drop down from the instructions above.
+2. Once the above step is complete, clone the to-do-list week7 project.
+
+   ``` git clone to-do-list-project-URL```
+
+   If you have issues cloning the github project, follow the below steps.
+     - Create a folder for deployment manifests.
+
+       ```mkdir deployment-templates```
+
+     - Create the todolist deployment and service templates inside the above created folder.
+     - Create todolist-deployment.yaml and copy the contents from project and save.
+
+          ```
+          cat << "EOF" > deployment-templates/todolist-deployment.yaml
+          apiVersion: apps/v1
+          kind: Deployment
+          metadata:
+            name: to-do-list
+            labels:
+              app: to-do-list
+          spec:
+            selector:
+              matchLabels:
+                app: to-do-list
+            replicas: 1
+            template:
+              metadata:
+                labels:
+                  app: to-do-list
+              spec:
+                containers:
+                - name: to-do-list
+                  image: sghegde/accelerate-cloudnative22:frontend_v1
+                  imagePullPolicy: Always
+                  ports:
+                  - containerPort: 8080
+                    name: https
+                    protocol: TCP
+          EOF
+          ```
+    - Create todolist-service.yaml and copy the contents from project and save.
+
+          ```
+          cat << "EOF" > deployment-templates/todolist-service.yaml
+          apiVersion: v1
+          kind: Service
+          metadata:
+            name: todolist-service
+          spec:
+            type: NodePort
+            # Each Pod in the Deployment that you created previously has below label. So the Pods in the Deployment will become members of this Service.
+            selector:
+              app: to-do-list
+            ports:
+                # By default and for convenience, the `targetPort` is set to the same value as the `port` field.
+              - port: 8080
+                targetPort: 8080
+                # Optional field
+                # By default and for convenience, the Kubernetes control plane will allocate a port from a range (default: 30000-32767)
+                nodePort: 30007
+          EOF
+          ```
+
+3. Deploy the to-do-list frontend application on your cluster using kubectl
+   - Create the deployment. Execute the below command from `deployment-templates` directory.
      ```
-     "install-backend": "cd backend && npm install",
-     "install-both": "npm install & npm run install-backend",
-     "backend": "cd backend && node index.js",
-     "start-both": "npm run backend & npm start"
+     kubectl apply -f todolist-deployment.yaml
      ```
-   + The `package.json` file `scripts` property should now look similar to the screen shot shown below:
-     ![Screen Shot 2022-06-24 at 12 31 47 AM](https://user-images.githubusercontent.com/57464095/175486138-37ee5abb-1409-4305-aeaa-eb821dff3781.png)
+   - Validate if the deployment is running with below commands.
 
-     **Note:** This configuration will allow us install all dependencies needed for both our Front-end and Backend application as well as running both application from one directory instead of creating multiple terminals.
-     
-2. Navigate to our project's root directory once again and run the following commands w/in the terminal. **Hint:** Essentially, this is the directory where our `src` and `public` folders are located.
-  + Run `npm run install-both` to install all dependencies for both applications (Todo List Application and Express Application)
-  + Run `npm run start-both` to start up both applications (Todo List Application and Express Application)
+     ```
+     kubectl get deployments
+     ```
+     Output will look something like below.
+     ```
+     NAME         READY   UP-TO-DATE   AVAILABLE   AGE
+     to-do-list   1/1     1            1           31m
+     ```
 
-**Optional:** To Test and see if your Express Application was implemented correctly, run the following command: `npm run backend`\
-**Note:** Make sure all processes are terminated before running this command.
-  + There should be no error message and a message similar to the screenshot provided below should be displayed:
-    ![Screen Shot 2022-06-24 at 12 40 20 AM](https://user-images.githubusercontent.com/57464095/175487997-f8b2bd8c-8ee6-41bb-83da-f82f39c92dea.png)
+     ```
+     kubectl get pods
+     ```
+     Output will look something like below.
+     ```
+     NAME                          READY   STATUS    RESTARTS   AGE
+     to-do-list-786468885b-bl5p5   1/1     Running   0          30m
+     ```
+
+  - Create and expose the service. Execute the below command from `deployment-templates` directory.
+     ```
+     kubectl apply -f todolist-service.yaml
+     ```
+  - Validate the service creation.
+    ```
+    kubectl get service
+    ```
+    Output will look something like below.
+    ```
+    NAME               TYPE           CLUSTER-IP      EXTERNAL-IP   PORT(S)          AGE
+    todolist-service   LoadBalancer   172.21.150.79   <pending>     8080:30178/TCP   18s
+    ```
+
+
+### Access your to-do-list frontend application
+
+Upon completion of the deployment of to-do-list frontend application on your IBM cloud kubernetes cluster, access the application on your browser using bewlo steps.
+
+1. Get the `EXTERNAL-IP` of your node using below command
+```
+get nodes --output wide
+```
+Output will look something like below.
+```
+NAME            STATUS   ROLES    AGE    VERSION       INTERNAL-IP     EXTERNAL-IP      OS-IMAGE             KERNEL-VERSION       CONTAINER-RUNTIME
+10.144.213.61   Ready    <none>   3d1h   v1.23.8+IKS   10.144.213.61   169.51.203.132   Ubuntu 18.04.6 LTS   4.15.0-189-generic   containerd://1.6.6
+```
+2. Access your application on a browser. Replace the `<EXTERNAL-IP>`
+```
+http://<EXTERNAL-IP>:30007
+```
+Example:
+```
+http://169.51.203.132:30007
+```
+<img width="1435" alt="Screen Shot 2022-07-25 at 10 27 54 AM" src="https://media.github.ibm.com/user/32795/files/8474c100-0c04-11ed-8fa4-3c143efebaf3">
+
 
 ## Pre-session Material
-Here is a [**link**](https://ibm.ent.box.com/file/975198401278) to the pre-session material that was provided to you earlier.
+
+CloudNative concepts
+https://cloudnative101.dev/concepts/cloud-native/
+
+CloudNative development concepts
+https://cloudnative101.dev/concepts/cloud-native-app-dev/
+
+Containers concepts
+https://cloudnative101.dev/concepts/containers/
+
+What is kubernetes:
+https://cloudnative101.dev/concepts/kubernetes/
+
+Kubernetes concepts :
+https://kubernetes.io/docs/concepts/
