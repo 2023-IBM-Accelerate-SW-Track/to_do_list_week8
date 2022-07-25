@@ -72,13 +72,12 @@ At this point, it is assumed that you have a terminal window opened and that you
    ```
    git clone <your-to-do-list-project-URL>
    ```
+  Go to your project directory:
+   ```
+   cd to-do-list_week7-<your-username>
+   ```
 
   If you are able to successfully clone the to-do-list project, jump to step 2 to deploy the application. If you have issues cloning the GitHub project, follow the below steps on your IBM Cloud **Shell** to create the deployment templates.
-
-  - Go to your project directory:
-    ```
-    cd to-do-list_week7-<your-username>
-    ```
 
   - Create a folder for Deployment manifests:
     ```
