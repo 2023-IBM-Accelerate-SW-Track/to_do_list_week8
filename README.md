@@ -120,11 +120,11 @@ docker build -f Dockerfile -t ibmaccelerate/cloudnative:frontend_v1 .
 **Note** : Frontend deployment image `ibmaccelerate/cloudnative:frontend_v1` can be found in the `todolist-deployment.yaml` file.
 
 3. Deploy the to-do-list frontend application on your cluster using kubectl on your `IBM cloud shell`
-   - Create the deployment. Execute the below command from `deployment-templates` directory.
+  - Create the deployment. Execute the below command from `deployment-templates` directory.
      ```
      kubectl apply -f todolist-deployment.yaml
      ```
-   - Validate if the deployment is running with below commands.
+  - Validate if the deployment is running with below commands.
 
      ```
      kubectl get deployments
@@ -172,7 +172,7 @@ Output will look something like below.
 NAME            STATUS   ROLES    AGE    VERSION       INTERNAL-IP     EXTERNAL-IP      OS-IMAGE             KERNEL-VERSION       CONTAINER-RUNTIME
 10.144.213.61   Ready    <none>   3d1h   v1.23.8+IKS   10.144.213.61   169.51.203.132   Ubuntu 18.04.6 LTS   4.15.0-189-generic   containerd://1.6.6
 ```
-2. Access your application on a browser. Replace the `<EXTERNAL-IP>`
+2. Access your application on a browser. Replace the `<EXTERNAL-IP>` from the above results.
 ```
 http://<EXTERNAL-IP>:30007
 ```
