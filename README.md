@@ -159,7 +159,7 @@ docker build -f Dockerfile -t ibmaccelerate/cloudnative:frontend_v1 .
     Output will look something like below.
     ```
     NAME               TYPE           CLUSTER-IP      EXTERNAL-IP   PORT(S)          AGE
-    todolist-service   LoadBalancer   172.21.150.79   <pending>     8080:30178/TCP   18s
+    todolist-service   NodePort       172.21.4.185    <none>        8080:30007/TCP   14s
     ```
  **Note:** If you are going to run the instructions from the terminal window then follow all these instructions on your terminal window.
 
