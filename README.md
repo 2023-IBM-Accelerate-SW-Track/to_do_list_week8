@@ -1,13 +1,13 @@
 
-# Project Week 7: Deploying to-do list frontend microservice on a cloud cluster
+# Project Week 7: Deploying to-do list front-end microservice on a cloud cluster
 
 ## Introduction
-As of now, you have completed Project Week 6 and should now have an understanding of the regular development of a fully functional to-do-list Application. For Project Week 7, you will go through the process of understanding containerizing the microservice and the process of deploying the to-do-list frontend microservice component on an IBM cloud cluster.
+As of now, you have completed Project Week 6 and should now have an understanding of the regular development of a fully functional to-do-list Application. For Project Week 7, you will go through the process of understanding containerizing the microservice and the process of deploying the to-do-list front-end microservice component on an IBM cloud cluster.
 
 
 ## Containerizing microservice
 - Developing in microservices is the art of breaking down the old model of building one large application, i.e., a "monolithic" application, and forming a new model where specialized, cloud-hosted sub applications—each charged with a very specific task—work together. For this, we have added a `frontendserver.js` using express.
-- Containers are a standard way to package an application and all its dependencies so that it can be moved between environments and run without change. Docker is one of the most popular Containerization platforms, which allows you to develop, deploy, and run the application inside containers. We have created a Dockerfile to containerize the to-do-list frontend application. **Note**: Below commands are just for your understanding.
+- Containers are a standard way to package an application and all its dependencies so that it can be moved between environments and run without change. Docker is one of the most popular Containerization platforms, which allows you to develop, deploy, and run the application inside containers. We have created a Dockerfile to containerize the to-do-list front-end application. **Note**: Below commands are just for your understanding.
 - We have then built the docker image and tagged it using the below command.
 ```
 docker build -f Dockerfile -t ibmaccelerate/cloudnative:frontend_v1 .
@@ -62,7 +62,7 @@ A new tab should open. Leave it open since we will use it in the next steps.
 
 <img width="1438" alt="IBM Cloud Shell - Commands" src="images/ibmcloud_shell.png">
 
-### Deploy the to-do list application (frontend) microservice of Kubernetes cluster
+### Deploy the to-do list application (front-end) microservice of Kubernetes cluster
 
 #### Deploy the application from `IBM Cloud Shell` of your deployed Kubernetes cluster.
 At this point, it is assumed that you have a terminal window opened and that you are connected to the clusters (steps in the previous section)/
@@ -139,7 +139,7 @@ At this point, it is assumed that you have a terminal window opened and that you
     ```
   **Note** : Frontend deployment image `ibmaccelerate/cloudnative:frontend_v1` can be found in the `todolist-deployment.yaml` file.
 
-2. Deploy the to-do-list frontend application on your cluster using `kubectl` on your **IBM Cloud Shell**.
+2. Deploy the to-do-list front-end application on your cluster using `kubectl` on your **IBM Cloud Shell**.
 
    - Create the Deployment. Execute the below command from `deployment-templates` directory.
      ```
@@ -187,9 +187,9 @@ At this point, it is assumed that you have a terminal window opened and that you
  **Note:** The above commands can also be executed from your local terminal window.
 
 
-### Access your to-do list frontend application
+### Access your to-do list front-end application
 
-Upon completion of the Deployment of the to-do list frontend application on your IBM Cloud Kubernetes cluster, access the application on your browser using the below steps.
+Upon completion of the Deployment of the to-do list front-end application on your IBM Cloud Kubernetes cluster, access the application on your browser using the below steps.
 
 1. Get the `EXTERNAL-IP` of your node using the below command
   ```
