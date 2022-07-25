@@ -44,7 +44,7 @@ docker build -f Dockerfile -t ibmaccelerate/cloudnative:frontend_v1 .
 
 <img width="506" alt="Screen Shot 2022-07-25 at 11 31 21 AM" src="https://media.github.ibm.com/user/32795/files/5182fb00-0c0d-11ed-8f74-63b2acfcb176">
 
-5. Once the Deployment is complete and the cluster is ready, open the IBM Cloud **Shell** located at the top right in the global header. 
+5. Once the Deployment is complete and the cluster is ready, open the IBM Cloud **Shell** located at the top right in the global header.
 
 <img width="1438" alt="IBM Cloud Shell - Open" src="https://media.github.ibm.com/user/32795/files/6bb7db80-0c03-11ed-9c2f-44d3ee89e537">
 
@@ -67,79 +67,85 @@ A new tab should open. Leave it open since we will use it in the next steps.
 #### Deploy the application from `IBM Cloud Shell` of your deployed Kubernetes cluster.
 At this point, it is assumed that you have a terminal window opened and that you are connected to the clusters (steps in the previous section)/
 
-1. Clone the to-do-list week 7 project using your IBM Cloud **Shell**. If you have issues cloning the GitHub project, follow the below steps on your IBM Cloud **Shell**.
+1. Clone the to-do-list week 7 project using your IBM Cloud **Shell**. **Note** You would need pass github personal access token as the password when prompted.
 
    ```
    git clone <your-to-do-list-project-URL>
    ```
 
-2. Go to your project directory: 
-  ```
-  cd to-do-list_week7-<your-username>
-  ```
+  If you are able to successfully clone the to-do-list project, jump to step 2 to deploy the application. If you have issues cloning the GitHub project, follow the below steps on your IBM Cloud **Shell** to create the deployment templates.
 
-3. Create a folder for Deployment manifests:
-  ```
-  mkdir deployment-templates
-  ```
+  - Go to your project directory:
+    ```
+    cd to-do-list_week7-<your-username>
+    ```
 
-4. Create the to-do list Deployment and Service templates inside the above-created folder.
-  - Create todolist-deployment.yaml and copy the contents from the project and save.
+  - Create a folder for Deployment manifests:
+    ```
+    mkdir deployment-templates
+    ```
 
-          ```
-          cat << "EOF" > deployment-templates/todolist-deployment.yaml
-          apiVersion: apps/v1
-          kind: Deployment
-          metadata:
-            name: to-do-list
-            labels:
-              app: to-do-list
-          spec:
-            selector:
-              matchLabels:
-                app: to-do-list
-            replicas: 1
-            template:
-              metadata:
-                labels:
-                  app: to-do-list
-              spec:
-                containers:
-                - name: to-do-list
-                  image: ibmaccelerate/cloudnative:frontend_v1
-                  imagePullPolicy: Always
-                  ports:
-                  - containerPort: 8080
-                    name: https
-                    protocol: TCP
-          EOF
-          ```
-  - Create todolist-service.yaml and copy the contents from project and save.
+  - Create the to-do list Deployment and Service templates inside the above-created folder with below steps.
+    - Create todolist-deployment.yaml and copy the contents from the project and save.
 
-          ```
-          cat << "EOF" > deployment-templates/todolist-service.yaml
-          apiVersion: v1
-          kind: Service
-          metadata:
-            name: todolist-service
-          spec:
-            type: NodePort
-            # Each Pod in the Deployment that you created previously has the below label. So the Pods in the Deployment will become members of this Service.
-            selector:
-              app: to-do-list
+    ```
+    cat << "EOF" > deployment-templates/todolist-deployment.yaml
+    apiVersion: apps/v1
+    kind: Deployment
+    metadata:
+      name: to-do-list
+      labels:
+        app: to-do-list
+    spec:
+      selector:
+        matchLabels:
+          app: to-do-list
+      replicas: 1
+      template:
+        metadata:
+          labels:
+            app: to-do-list
+        spec:
+          containers:
+          - name: to-do-list
+            image: ibmaccelerate/cloudnative:frontend_v1
+            imagePullPolicy: Always
             ports:
-                # By default and for convenience, the `targetPort` is set to the same value as the `port` field.
-              - port: 8080
-                targetPort: 8080
-                # Optional field
-                # By default and for convenience, the Kubernetes control plane will allocate a port from a range (default: 30000-32767)
-                nodePort: 30007
-          EOF
-          ```
+            - containerPort: 8080
+              name: https
+              protocol: TCP
+    EOF
+    ```
+    - Create todolist-service.yaml and copy the contents from project and save.
+
+    ```
+    cat << "EOF" > deployment-templates/todolist-service.yaml
+    apiVersion: v1
+    kind: Service
+    metadata:
+      name: todolist-service
+    spec:
+      type: NodePort
+      # Each Pod in the Deployment that you created previously has the below label. So the Pods in the Deployment will become members of this Service.
+      selector:
+        app: to-do-list
+      ports:
+          # By default and for convenience, the `targetPort` is set to the same value as the `port` field.
+        - port: 8080
+          targetPort: 8080
+          # Optional field
+          # By default and for convenience, the Kubernetes control plane will allocate a port from a range (default: 30000-32767)
+          nodePort: 30007
+    EOF
+    ```
   **Note** : Frontend deployment image `ibmaccelerate/cloudnative:frontend_v1` can be found in the `todolist-deployment.yaml` file.
 
-5. Deploy the to-do-list frontend application on your cluster using `kubectl` on your **IBM Cloud Shell**.
-   - Create the Deployment. Execute the below command from `deployment-templates` directory (`cd deployment-templates`).
+2. Deploy the to-do-list frontend application on your cluster using `kubectl` on your **IBM Cloud Shell**.
+
+   - Create the Deployment. Execute the below command from `deployment-templates` directory.
+     ```
+     cd deployment-templates
+     ```
      ```
      kubectl apply -f todolist-deployment.yaml
      ```
@@ -149,7 +155,7 @@ At this point, it is assumed that you have a terminal window opened and that you
      ```
      kubectl get deployments
      ```
-     Output will look something like below. 
+     Output will look something like below. **Note** If status shows as Ready 0/1, it may take a few min for status to go to Ready 1/1, you can run the command again after few minutes to check the status.
      ```
      NAME         READY   UP-TO-DATE   AVAILABLE   AGE
      to-do-list   1/1     1            1           31m
@@ -158,7 +164,8 @@ At this point, it is assumed that you have a terminal window opened and that you
      ```
      kubectl get pods
      ```
-     The output will look something like the below example:
+     The output will look something like the below example. **Note** If status shows as `ContainerCreating`, it may take a few min for status to become running, you can run the command again after few minutes to check the status.
+
      ```
      NAME                          READY   STATUS    RESTARTS   AGE
      to-do-list-786468885b-bl5p5   1/1     Running   0          30m
@@ -216,7 +223,7 @@ Example:
 1. Cloud-Native
    - [Overview](https://cloudnative101.dev/concepts/cloud-native/)
    - [Application Development](https://cloudnative101.dev/concepts/cloud-native-app-dev/)
-2. Containers 
+2. Containers
    - [Concepts](https://cloudnative101.dev/concepts/containers/)
 3. [What is Kubernetes?](https://cloudnative101.dev/concepts/kubernetes/)
 4. Kubernetes
