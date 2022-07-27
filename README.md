@@ -1,5 +1,5 @@
 
-# Project Week 7: Deploying to-do list front-end microservice on a cloud cluster
+# Project Week 7: Deploying to-do-list front-end microservice on a IBM cloud cluster
 
 ## Introduction
 As of now, you have completed Project Week 6 and should now have an understanding of the regular development of a fully functional to-do-list Application. For Project Week 7, you will go through the process of understanding containerizing the microservice and the process of deploying the to-do-list front-end microservice component on an IBM cloud cluster.
