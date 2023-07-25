@@ -220,10 +220,9 @@ Example:
 ## Pre-session material
 
 1. Cloud-Native
-   - [Overview](https://cloudnative101.dev/concepts/cloud-native/)
-   - [Application Development](https://cloudnative101.dev/concepts/cloud-native-app-dev/)
+   - [Overview](https://www.ibm.com/topics/cloud-native)
 2. Containers
-   - [Concepts](https://cloudnative101.dev/concepts/containers/)
-3. [What is Kubernetes?](https://cloudnative101.dev/concepts/kubernetes/)
+   - [Concepts](https://www.ibm.com/topics/containers)
+3. [What is Kubernetes?](https://www.redhat.com/en/topics/containers/what-is-kubernetes)
 4. Kubernetes
    - [Concepts](https://kubernetes.io/docs/concepts/)
