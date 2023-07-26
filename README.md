@@ -2,7 +2,7 @@
 # Project Week 8: Deploying to-do-list front-end microservice on a IBM cloud cluster
 
 ## Introduction
-As of now, you have completed Project Week 6 and should now have an understanding of the regular development of a fully functional to-do-list Application. For Project Week 8, you will go through the process of understanding containerizing the microservice and the process of deploying the to-do-list front-end microservice component on an IBM cloud cluster.
+As of now, you have completed Project Week 7 and should now have an understanding of the regular development of a fully functional to-do-list Application. For Project Week 8, you will go through the process of understanding containerizing the microservice and the process of deploying the to-do-list front-end microservice component on an IBM cloud cluster.
 
 
 ## Containerizing microservice
@@ -10,7 +10,7 @@ As of now, you have completed Project Week 6 and should now have an understandin
 - Containers are a standard way to package an application and all its dependencies so that it can be moved between environments and run without change. Docker is one of the most popular Containerization platforms, which allows you to develop, deploy, and run the application inside containers. We have created a Dockerfile to containerize the to-do-list front-end application. **Note**: Below commands are just for your understanding.
 - We have then built the docker image and tagged it using the below command.
 ```
-docker build -f Dockerfile -t ibmaccelerate/cloudnative:frontend_v1 .
+docker build -f Dockerfile -t ibmaccelerate/cloudnative:frontend2023_v1 .
 ```
 - The Image is pushed to the docker hub. You will be using this already built image to deploy on your cluster.
 
@@ -107,7 +107,7 @@ At this point, it is assumed that you have a terminal window opened and that you
         spec:
           containers:
           - name: to-do-list
-            image: ibmaccelerate/cloudnative:frontend_v1
+            image: ibmaccelerate/cloudnative:frontend2023_v1
             imagePullPolicy: Always
             ports:
             - containerPort: 8080
