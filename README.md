@@ -137,7 +137,7 @@ At this point, it is assumed that you have a terminal window opened and that you
           nodePort: 30007
     EOF
     ```
-  **Note** : Frontend deployment image `ibmaccelerate/cloudnative:frontend_v1` can be found in the `todolist-deployment.yaml` file.
+  **Note** : Frontend deployment image `ibmaccelerate/cloudnative:frontend2023_v1` can be found in the `todolist-deployment.yaml` file.
 
 2. Deploy the to-do-list front-end application on your cluster using `kubectl` on your **IBM Cloud Shell**.
 
